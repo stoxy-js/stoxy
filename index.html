@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Stoxy Demo</title>
+        <meta name="author" content="" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+
+    <body>
+        <p>Update the state of a Stoxy object</p>
+
+        <form>
+            <input type="text" placeholder="Key" name="key" />
+            <input type="text" placeholder="Value" name="value" />
+            <input type="submit" value="Update" />
+        </form>
+
+        <stoxy-get default="">stoxy.test.message</stoxy-get>
+
+        <script type="module">
+            import { write } from './js/stoxy.js';
+            write(
+                'stoxy.test.message',
+                'I am a test value set up for Stoxy. Modify me overwriting the key "stoxy.test.message"',
+            );
+            document.querySelector('form').addEventListener('submit', e => {
+                e.preventDefault();
+                const key = document.querySelector("input[name='key']").value;
+                const value = document.querySelector("input[name='value']").value;
+
+                write(key, value);
+            });
+        </script>
+
+        <script src="js/stoxy.js" type="module"></script>
+    </body>
+</html>

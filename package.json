@@ -1,0 +1,16 @@
+{
+  "name": "stoxy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "wds --node-resolve --watch --open"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@simplr-wc/prettier-config": "^1.0.1",
+    "@web/dev-server": "0.0.15"
+  },
+  "prettier": "@simplr-wc/prettier-config"
+}
