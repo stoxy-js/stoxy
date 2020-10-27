@@ -45,7 +45,6 @@ export function read(key) {
             const objectStore = transaction.objectStore(STOXY_DATA_STORAGE);
             const readRequest = objectStore.get(key);
             readRequest.onsuccess = event => {
-                console.log(event);
                 const resultData = event.target.result;
                 doEvent(READ_SUCCESS, { key, data: resultData });
                 resolve(resultData);
