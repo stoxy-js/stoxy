@@ -1,8 +1,8 @@
 {
   "name": "stoxy",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
-  "main": "index.js",
+  "main": "js/stoxy.js",
   "scripts": {
     "start": "wds --node-resolve --watch --open"
   },

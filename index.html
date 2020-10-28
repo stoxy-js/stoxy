@@ -11,14 +11,6 @@
     <body>
         <p>Update the state of a Stoxy object</p>
 
-        <form id="string-update-form" style="margin-bottom: 2rem;">
-            <label>Key</label>
-            <input type="text" placeholder="Key" name="key" id="string-key" />
-            <label>Value</label>
-            <input type="text" placeholder="Value" name="value" id="string-value" />
-            <input type="submit" value="Update" />
-        </form>
-
         <stoxy-string
             default="I am a default value set up for Stoxy. Modify me overwriting the key 'stoxy.test.message'"
             >stoxy.test.message</stoxy-string
@@ -26,9 +18,11 @@
 
         <form id="object-update-form" style="margin-top: 2rem;">
             <label>Key</label>
-            <input type="text" placeholder="Key" name="key" id="object-key" />
+            <input type="text" placeholder="Key" name="key" value="user" />
             <label>Value</label>
-            <textarea rows="4" cols="40" type="text" placeholder="Value" name="value" id="object-value"></textarea>
+            <textarea rows="4" cols="40" type="text" placeholder="Value" name="value">
+                { "name": "Matsu", "profileViewCount": 55 }
+            </textarea>
             <input type="submit" value="Update" />
         </form>
 
@@ -40,25 +34,19 @@
         <script type="module">
             import { read, write } from './js/stoxy.js';
             //write('user', { name: 'Matsu', profileViewCount: 55 });
-            document.querySelector('#string-update-form').addEventListener('submit', e => {
-                e.preventDefault();
-                const key = document.querySelector('#string-key').value;
-                const value = document.querySelector('#string-value').value;
-
-                write(key, value);
-            });
 
             document.querySelector('#object-update-form').addEventListener('submit', e => {
                 e.preventDefault();
-                const key = document.querySelector('#object-key').value;
-                const value = document.querySelector('#object-value').value;
+                const formData = new FormData(e.target);
+                const key = formData.get('key');
+                let data = formData.get('value');
+                try {
+                    data = JSON.parse(data);
+                } catch (err) {
+                    console.error(err);
+                }
 
-                write(key, JSON.parse(value));
-            });
-
-            read('user').then(user => {
-                document.querySelector('#object-key').value = 'user';
-                document.querySelector('#object-value').value = JSON.stringify(user);
+                write(key, data);
             });
         </script>
 
