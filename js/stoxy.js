@@ -39,6 +39,7 @@ class StoxyString extends Stoxy {
     stoxyUpdate(data) {
         //TODO: Handle the object props kinda like in object variant.
         // Currently doesn't work with for example user.profileInfo.viewCount
+        // We got the parts already, but let's see if we can easily use them
         this.innerHTML = data;
     }
 
