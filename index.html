@@ -12,24 +12,46 @@
         <p>Update the state of a Stoxy object</p>
 
         <stoxy-string
-            default="I am a default value set up for Stoxy. Modify me overwriting the key 'stoxy.test.message'"
-            >stoxy.test.message</stoxy-string
+            default="I am a default value set up for Stoxy. Modify me overwriting the key 'stoxy-test-message'"
+            >stoxy-test-message</stoxy-string
         >
 
         <form id="object-update-form" style="margin-top: 2rem;">
             <label>Key</label>
             <input type="text" placeholder="Key" name="key" value="user" />
             <label>Value</label>
-            <textarea rows="4" cols="40" type="text" placeholder="Value" name="value">
-                { "name": "Matsu", "profileViewCount": 55 }
+            <textarea rows="8" cols="30" type="text" placeholder="Value" name="value">
+{ 
+  "name": "Matsu",
+  "profileInfo": {
+    "viewCount": 55,
+    "visitors": {
+     "latestVisitor": "Batsu"
+    }
+  }
+}
             </textarea>
             <input type="submit" value="Update" />
         </form>
 
         <stoxy-object key="user" prefix="u.">
             <h2>Welcome, u.name</h2>
-            <p>Hello there, u.name. Your profile has accumulated u.profileViewCount views today.</p>
+            <p>Hello there, u.name. Your profile has accumulated u.profileInfo.viewCount views today.</p>
+            <p>The latest visitor of your profile was u.profileInfo.visitors.latestVisitor</p>
         </stoxy-object>
+
+        <p>
+            <b>
+                You can also access object properties with Stoxy-String by using a period in between properties, like
+                you would with json objects.
+            </b>
+        </p>
+
+        <p>
+            <stoxy-string>user.name</stoxy-string>
+            ProfileViewCount:
+            <stoxy-string>user.profileInfo.viewCount</stoxy-string>
+        </p>
 
         <script type="module">
             import { read, write } from './js/stoxy.js';
@@ -48,6 +70,12 @@
 
                 write(key, data);
             });
+
+            setTimeout(() => {
+                const d = document.createElement('stoxy-string');
+                d.textContent = 'user.name';
+                document.body.appendChild(d);
+            }, 2000);
         </script>
 
         <script src="js/stoxy.js" type="module"></script>

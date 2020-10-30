@@ -2,6 +2,10 @@ import { INIT_SUCCESS, PUT_SUCCESS, READ_SUCCESS } from './events.js';
 
 const STOXY_VERSION_NUMBER = 1;
 const STOXY_DATA_STORAGE = 'StoxyStorage';
+const STOXY_CACHE_SIZE = 5;
+
+const cacheKeys = [];
+const cache = {};
 
 function doEvent(name, data) {
     if (!data) {
@@ -36,7 +40,14 @@ function upgrade(event) {
 
 export function read(key) {
     return new Promise((resolve, reject) => {
+        const cachedObject = fetchFromCache(key);
+        if (cachedObject) {
+            console.log('Cache hit');
+            return resolve(cachedObject);
+        }
+
         open().then(db => {
+            console.log('Read Transaction started, because key ' + key + ' was not in the cache');
             const transaction = db.transaction([STOXY_DATA_STORAGE], 'readwrite');
             transaction.onerror = event => {
                 reject(event);
@@ -46,6 +57,9 @@ export function read(key) {
             const readRequest = objectStore.get(key);
             readRequest.onsuccess = event => {
                 const resultData = event.target.result;
+                if (resultData) {
+                    updateCache(key, resultData);
+                }
                 doEvent(READ_SUCCESS, { key, data: resultData });
                 resolve(resultData);
             };
@@ -53,11 +67,39 @@ export function read(key) {
     });
 }
 
+function fetchFromCache(key) {
+    const cachedObject = cache[key];
+    return cachedObject ? cachedObject : null;
+}
+
+function updateCache(key, data) {
+    if (!cacheKeys.includes(key)) {
+        cacheKeys.push(key);
+    }
+    cache[key] = data;
+    if (cacheKeys.length > 5) {
+        const keyToRemove = cacheKeys.shift();
+        delete cache[keyToRemove];
+    }
+}
+
+function invalidateCache(key) {
+    // If no key is provide, invalidate whole cache
+    if (!key) {
+        cache = {};
+        cacheKeys = [];
+        return;
+    }
+    cacheKeys.splice(cacheKeys.indexOf(key), 1);
+    delete cache[key];
+}
+
 export function write(key, data) {
     return new Promise((resolve, reject) => {
         open().then(db => {
             const transaction = db.transaction([STOXY_DATA_STORAGE], 'readwrite');
             transaction.oncomplete = event => {
+                invalidateCache(key);
                 doEvent(PUT_SUCCESS, { key, data });
                 resolve(event);
             };

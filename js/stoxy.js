@@ -23,16 +23,39 @@ class Stoxy extends HTMLElement {
 class StoxyString extends Stoxy {
     constructor() {
         super();
-        this.key = this.innerHTML;
+    }
+
+    _parseKey() {
+        const key = this.innerHTML;
+        if (!key.includes('.')) {
+            this.key = key;
+            return;
+        }
+        const keyParts = key.split('.');
+        this.key = keyParts.shift();
+        this.parts = keyParts;
     }
 
     stoxyUpdate(data) {
+        //TODO: Handle the object props kinda like in object variant.
+        // Currently doesn't work with for example user.profileInfo.viewCount
         this.innerHTML = data;
     }
 
     async stoxyInit() {
+        this._parseKey();
         const data = await read(this.key);
-        this.stoxyUpdate(data ? data : this.getAttribute('default'));
+        if (!this.parts) {
+            this.stoxyUpdate(data ? data : this.getAttribute('default'));
+        } else {
+            const parts = [...this.parts];
+            let dataPart = data;
+            while (parts.length > 0) {
+                const partKey = parts.shift();
+                dataPart = dataPart[partKey];
+            }
+            this.stoxyUpdate(dataPart ? dataPart : this.this.getAttribute('default'));
+        }
     }
 
     static get observedAttributes() {
@@ -48,6 +71,7 @@ class StoxyObject extends Stoxy {
     }
 
     stoxyUpdate(data) {
+        if (!data) return;
         const prefix = this.getAttribute('prefix');
         const keys = Object.keys(data);
         let newContent = this.content;
@@ -55,9 +79,41 @@ class StoxyObject extends Stoxy {
             const regexKey = prefix + k;
             const keyData = data[k];
             if (!keyData) return;
-            newContent = newContent.replace(new RegExp(regexKey, 'g'), keyData);
+
+            if (typeof keyData === 'object') {
+                newContent = this._replaceObject(newContent, regexKey, keyData);
+            } else {
+                newContent = this._replaceString(newContent, regexKey, keyData);
+            }
         });
         this.innerHTML = newContent;
+    }
+
+    _replaceObject(newContent, regexKey, keyData) {
+        if (!newContent.includes(regexKey)) {
+            return newContent;
+        }
+        // TODO: Try to find a regex to fix case of "your name is user.name." with the period at end
+        const objectPropertyRegex = new RegExp(`${regexKey}[^ <>]*`, 'g');
+        const regexKeys = newContent.match(objectPropertyRegex);
+        const foundProperties = regexKeys.map(k => k.replace(`${regexKey}.`, ''));
+        for (const prop of foundProperties) {
+            if (prop.includes('.')) {
+                const regexKeyAddition = prop.split('.')[0];
+                newContent = this._replaceObject(
+                    newContent,
+                    `${regexKey}.${regexKeyAddition}`,
+                    keyData[regexKeyAddition],
+                );
+            } else {
+                newContent = this._replaceString(newContent, `${regexKey}.${prop}`, keyData[prop]);
+            }
+        }
+        return newContent;
+    }
+
+    _replaceString(newContent, regexKey, keyData) {
+        return newContent.replace(new RegExp(regexKey, 'g'), keyData);
     }
 
     async stoxyInit() {

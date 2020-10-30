@@ -31,3 +31,6 @@ Ideas:
 
 - Make Stoxy store the last 3(or 5?) queries in memory so you don't have to re-query them every time.
 e.g. a profile page accessing multiple user information fields
+
+
+- Some kind of a componaent variant / markdown for list iteration?
