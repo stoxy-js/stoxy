@@ -1,4 +1,4 @@
-import { INIT_SUCCESS, PUT_SUCCESS, READ_SUCCESS } from './events.js';
+import { INIT_SUCCESS, PUT_SUCCESS, READ_SUCCESS, DELETE_SUCCESS } from './events.js';
 
 const STOXY_VERSION_NUMBER = 1;
 const STOXY_DATA_STORAGE = 'StoxyStorage';
@@ -13,10 +13,6 @@ function doEvent(name, data) {
         return;
     }
     window.dispatchEvent(new CustomEvent(name, { detail: data }));
-}
-
-export function create() {
-    open();
 }
 
 export function open() {
@@ -113,4 +109,21 @@ export function write(key, data) {
     });
 }
 
-export function del(key) {}
+export function del(key) {
+    return new Promise((resolve, reject) => {
+        open().then(db => {
+            const transaction = db.transaction([STOXY_DATA_STORAGE], 'readwrite');
+            transaction.oncomplete = event => {
+                invalidateCache(key);
+                doEvent(DELETE_SUCCESS, { key });
+                resolve(event);
+            };
+            transaction.onerror = event => {
+                reject(event);
+            };
+
+            const objectStore = transaction.objectStore(STOXY_DATA_STORAGE);
+            objectStore.delete(key);
+        });
+    });
+}

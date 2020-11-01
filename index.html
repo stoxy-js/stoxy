@@ -16,7 +16,7 @@
             >stoxy-test-message</stoxy-string
         >
 
-        <form id="object-update-form" style="margin-top: 2rem;">
+        <form id="object-update-form" style="margin-top: 2rem">
             <label>Key</label>
             <input type="text" placeholder="Key" name="key" value="user" />
             <label>Value</label>
@@ -34,8 +34,10 @@
             <input type="submit" value="Update" />
         </form>
 
+        <input type="button" value="Delete" id="delete-button" />
+
         <stoxy-object key="user" prefix="u.">
-            <h2>Welcome, u.name</h2>
+            <h2>Welcome, u.name.</h2>
             <p>Hello there, u.name. Your profile has accumulated u.profileInfo.viewCount views today.</p>
             <p>The latest visitor of your profile was u.profileInfo.visitors.latestVisitor</p>
         </stoxy-object>
@@ -54,7 +56,7 @@
         </p>
 
         <script type="module">
-            import { read, write } from './js/stoxy.js';
+            import { read, write, del } from './js/stoxy.js';
             //write('user', { name: 'Matsu', profileViewCount: 55 });
 
             document.querySelector('#object-update-form').addEventListener('submit', e => {
@@ -71,6 +73,12 @@
                 write(key, data);
             });
 
+            document.querySelector('#delete-button').addEventListener('click', e => {
+                e.preventDefault();
+                const key = document.querySelector("input[name='key']").value;
+                del(key);
+            });
+
             setTimeout(() => {
                 const d = document.createElement('stoxy-string');
                 d.textContent = 'user.name';
@@ -78,6 +86,7 @@
             }, 2000);
         </script>
 
-        <script src="js/stoxy.js" type="module"></script>
+        <script src="js/stoxy-string.js" type="module"></script>
+        <script src="js/stoxy-object.js" type="module"></script>
     </body>
 </html>
