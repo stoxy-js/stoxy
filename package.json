@@ -2,9 +2,11 @@
   "name": "stoxy",
   "version": "0.0.3",
   "description": "",
-  "main": "js/stoxy.js",
+  "main": "stoxy.js",
   "scripts": {
-    "start": "wds --node-resolve --watch --open"
+    "start": "wds --node-resolve --watch --open",
+    "example:basic": "cd examples/basic-example && npm start",
+    "example:translation": "cd examples/translation-example && npm start"
   },
   "author": "",
   "license": "ISC",

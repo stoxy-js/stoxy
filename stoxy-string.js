@@ -1,9 +1,17 @@
 import Stoxy from './stoxy.js';
-import { read } from './storage.js';
+import { read } from './stoxy-storage.js';
 
 class StoxyString extends Stoxy {
     constructor() {
         super();
+    }
+
+    setNoDataValue() {
+        this.stoxyUpdate(this._getKeyAndPartsAsString());
+    }
+
+    _getKeyAndPartsAsString() {
+        return [this.key, ...this.parts].reduce((a, b) => `${a}.${b}`);
     }
 
     _parseKey() {
@@ -16,7 +24,7 @@ class StoxyString extends Stoxy {
     stoxyUpdate(data) {
         if (!data) return;
         if (typeof data === 'object') {
-            const contentKey = [this.key, ...this.parts].reduce((a, b) => `${a}.${b}`);
+            const contentKey = this._getKeyAndPartsAsString();
             const content = this._replaceObject(contentKey, this.key, data);
             this.innerHTML = content;
         } else {

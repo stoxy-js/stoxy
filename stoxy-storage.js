@@ -1,4 +1,4 @@
-import { INIT_SUCCESS, PUT_SUCCESS, READ_SUCCESS, DELETE_SUCCESS } from './events.js';
+import { INIT_SUCCESS, PUT_SUCCESS, READ_SUCCESS, DELETE_SUCCESS } from './stoxy-events.js';
 
 const STOXY_VERSION_NUMBER = 1;
 const STOXY_DATA_STORAGE = 'StoxyStorage';
@@ -15,7 +15,7 @@ function doEvent(name, data) {
     window.dispatchEvent(new CustomEvent(name, { detail: data }));
 }
 
-export function open() {
+export function openStorage() {
     return new Promise((resolve, reject) => {
         const request = window.indexedDB.open(STOXY_DATA_STORAGE, STOXY_VERSION_NUMBER);
         request.onsuccess = event => {
@@ -42,7 +42,7 @@ export function read(key) {
             return resolve(cachedObject);
         }
 
-        open().then(db => {
+        openStorage().then(db => {
             console.log('Read Transaction started, because key ' + key + ' was not in the cache');
             const transaction = db.transaction([STOXY_DATA_STORAGE], 'readwrite');
             transaction.onerror = event => {
@@ -92,7 +92,7 @@ function invalidateCache(key) {
 
 export function write(key, data) {
     return new Promise((resolve, reject) => {
-        open().then(db => {
+        openStorage().then(db => {
             const transaction = db.transaction([STOXY_DATA_STORAGE], 'readwrite');
             transaction.oncomplete = event => {
                 invalidateCache(key);
@@ -111,7 +111,7 @@ export function write(key, data) {
 
 export function del(key) {
     return new Promise((resolve, reject) => {
-        open().then(db => {
+        openStorage().then(db => {
             const transaction = db.transaction([STOXY_DATA_STORAGE], 'readwrite');
             transaction.oncomplete = event => {
                 invalidateCache(key);

@@ -1,4 +1,5 @@
-import { PUT_SUCCESS, DELETE_SUCCESS } from './events.js';
+import { PUT_SUCCESS, DELETE_SUCCESS } from './stoxy-events.js';
+import { openStorage } from './stoxy-storage.js';
 
 export default class Stoxy extends HTMLElement {
     constructor() {
@@ -10,10 +11,12 @@ export default class Stoxy extends HTMLElement {
         });
         window.addEventListener(DELETE_SUCCESS, e => {
             if (e.detail.key === this.key) {
-                this.stoxyUpdate(this.key);
+                this.setNoDataValue();
             }
         });
     }
+
+    setNoDataValue() {}
 
     stoxyUpdate(event) {}
 
@@ -46,15 +49,19 @@ export default class Stoxy extends HTMLElement {
     }
 
     _replaceString(newContent, regexKey, keyData) {
-        return newContent.replace(new RegExp(regexKey, 'g'), keyData);
+        if (typeof keyData === 'undefined' || keyData === 'undefined') {
+            keyData = regexKey;
+        }
+        const regexString = regexKey.replace('.', '.') + '(?=|[^.-])';
+        return newContent.replace(new RegExp(regexString, 'g'), keyData);
     }
 }
 
 (async function init() {
     if (window.STOXY_INITIALIZED) return;
 
-    await open(); // Open once to create the db
+    await openStorage(); // Open once to create the db
     window.STOXY_INITIALIZED = true;
 })();
 
-export { open, read, write, del } from './storage.js';
+export { openStorage, read, write, del } from './stoxy-storage.js';

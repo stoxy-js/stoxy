@@ -1,11 +1,15 @@
 import Stoxy from './stoxy.js';
-import { read } from './storage.js';
+import { read } from './stoxy-storage.js';
 
 class StoxyObject extends Stoxy {
     constructor() {
         super();
         this.key = this.getAttribute('key');
         this.content = this.innerHTML;
+    }
+
+    setNoDataValue() {
+        this.stoxyUpdate(this.key);
     }
 
     stoxyUpdate(data) {
