@@ -116,9 +116,9 @@ write("user", user);
             </div>
 
             <script type="module">
-                import { write, del } from 'stoxy';
-                import 'stoxy/stoxy-string';
-                import 'stoxy/stoxy-object';
+                import { write, del } from '../../stoxy.js';
+                import '../../stoxy-string.js';
+                import '../../stoxy-object.js';
 
                 document.querySelector('select').addEventListener('change', e => {
                     const selected = e.target.options[e.target.selectedIndex].value;
