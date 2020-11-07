@@ -1,4 +1,4 @@
-Maybe make 2 seperate components? 
+Maybe make 2 seperate components?
 
 stoxy-string
 stoxy-object
@@ -15,22 +15,22 @@ Usage of Object:
 
 ```html
 <stoxy-object key="user" prefix="u">
-    <h2> Profile of u.name</h2>
+    <h2>Profile of u.name</h2>
     <p>Hello, u.name. Your profile has been visited u.profileViewCount times today</p>
 </stoxy-object>
 ```
 
 Ideas:
 
-- Make the `.` a accessor, like it's in javascript, so if for example the user uses the following:
+-   Some kind of a componaent variant / markdown for list iteration?
+
+Maybe something like
+
+```html
+<!-- Iterates through userinformation.users -->
+<stoxy-repeat items="users" var="user">
+    <p>User user.id</p>
+    <p>Name: user.name</p>
+    <p>Age: user.age</p>
+</stoxy-repeat>
 ```
-<stoxy-string>user.information.name</stoxy-string>
-```
-, the accessor would fetch the the object `user` from the indexedDB and then access it's property information and then name
-
-
-- Make Stoxy store the last 3(or 5?) queries in memory so you don't have to re-query them every time.
-e.g. a profile page accessing multiple user information fields
-
-
-- Some kind of a componaent variant / markdown for list iteration?
