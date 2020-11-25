@@ -34,3 +34,10 @@ e.g. a profile page accessing multiple user information fields
 
 
 - Some kind of a componaent variant / markdown for list iteration?
+
+Something like
+```html
+<stoxy-repeat key="user.skills" prefix="s.">
+    <p>Skill: s.name</p>
+</stoxy-repeat>
+```
