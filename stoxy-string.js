@@ -2,10 +2,6 @@ import Stoxy from './stoxy.js';
 import { read } from './stoxy-storage.js';
 
 class StoxyString extends Stoxy {
-    constructor() {
-        super();
-    }
-
     setNoDataValue() {
         this.stoxyUpdate(this._getKeyAndPartsAsString());
     }

@@ -37,7 +37,7 @@ e.g. a profile page accessing multiple user information fields
 
 Something like
 ```html
-<stoxy-repeat key="user.skills" prefix="s.">
-    <p>Skill: s.name</p>
+<stoxy-repeat key="user.skills" id="uSkill">
+    <p>Skill: uSkill</p>
 </stoxy-repeat>
 ```

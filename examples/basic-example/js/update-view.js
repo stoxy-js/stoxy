@@ -36,10 +36,10 @@ export default class UpdateView extends HTMLElement {
         this.shadowRoot.querySelector("input[type='submit']").click();
     }
 
-    _writeFormData(e) {
+    async _writeFormData(e) {
         e.preventDefault();
         const formData = new FormData(this.form);
-        const data = {};
+        const data = (await read('user')) || {};
         data.firstName = formData.get('firstName');
         data.lastName = formData.get('lastName');
         data.age = formData.get('age');

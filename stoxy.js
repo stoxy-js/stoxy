@@ -27,6 +27,7 @@ export default class Stoxy extends HTMLElement {
     }
 
     _replaceObject(newContent, regexKey, keyData) {
+        console.log(regexKey);
         if (!newContent.includes(regexKey)) {
             return newContent;
         }

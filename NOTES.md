@@ -34,3 +34,8 @@ Maybe something like
     <p>Age: user.age</p>
 </stoxy-repeat>
 ```
+
+Optimize the read operation.
+
+-   Set key to array when fetching, with a reference to the promise of fetch.
+-   Others fetching the same info should wait for that promise to fulfill

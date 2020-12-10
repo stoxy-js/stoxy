@@ -1,7 +1,7 @@
 {
   "name": "stoxy",
-  "version": "0.0.4",
-  "description": "",
+  "version": "0.0.5",
+  "description": "Stoxy is a state management tool used for easy access to frequently used data without the hassle of template strings.",
   "main": "stoxy.js",
   "scripts": {
     "start": "wds --node-resolve --watch --open",
