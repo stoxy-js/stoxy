@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>HTML Element Template</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+
+        <style>
+            html,
+            body {
+                font-family: 'Roboto', sans-serif;
+                padding: 0;
+                margin: 0;
+                background: #2a2426;
+                color: #a7c080;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-top: 10%;
+            }
+
+            .user-information {
+                width: 60%;
+            }
+
+            .information-modification {
+                width: 60%;
+                margin-top: 5%;
+            }
+
+            textarea[invalid] {
+                background: lightgray;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="user-information">
+            <h2>Hello, <stoxy-string default="World">user.name!</stoxy-string></h2>
+
+            <p>With stoxy you can easily create dynamic content without any javascript in you HTML</p>
+            <stoxy-object key="user" prefix="u.">
+                <p><b>Try it out by modifying the following attributes:</b></p>
+
+                <p>My name is: u.name</p>
+                <p>My favorite animals are: u.favoriteAnimals</p>
+                <p>My favorite programming languages are:</p>
+                <p>(Set array to user.favoriteProgrammingLanguages)</p>
+                <stoxy-repeat key="user.favoriteProgrammingLanguages" id="progLang">
+                    <li>progLang</li>
+                </stoxy-repeat>
+            </stoxy-object>
+        </div>
+
+        <div class="information-modification">
+            <!-- prettier-ignore -->
+            <textarea cols="40" rows="16">
+{
+    "name": "Matsu"
+}
+</textarea>
+        </div>
+        <script type="module">
+            import 'stoxy/stoxy-repeat';
+            import 'stoxy/stoxy-object';
+            import 'stoxy/stoxy-string';
+            import { write } from 'stoxy';
+
+            let previousContent = '';
+            document.querySelector('textarea').addEventListener('keyup', e => {
+                const data = e.target.value;
+                if (data == previousContent) return;
+                previousContent = data;
+                let jsonData;
+                try {
+                    jsonData = JSON.parse(data);
+                } catch (err) {
+                    e.target.setAttribute('invalid', '');
+                    console.log('Invalid json', err);
+                    return;
+                }
+                e.target.removeAttribute('invalid');
+                console.log('Successfull');
+                write('user', jsonData);
+            });
+        </script>
+    </body>
+</html>
