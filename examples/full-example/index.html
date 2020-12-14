@@ -7,23 +7,25 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
 
+        <script type="module" src="https://cdn.jsdelivr.net/npm/highlight-js-wc@1.0.0/highlight-js-wc.min.js"></script>
         <style>
-            html,
             body {
                 font-family: 'Roboto', sans-serif;
                 padding: 0;
-                margin: 0;
+                width: 60%;
+                margin: 1.5% auto 0;
                 background: #2a2426;
                 color: #a7c080;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                margin-top: 10%;
             }
 
             .user-information {
                 width: 60%;
+                height: 50%;
+                margin-bottom: 2.5%;
             }
 
             .information-modification {
@@ -33,6 +35,34 @@
 
             textarea[invalid] {
                 background: lightgray;
+            }
+
+            .error-message {
+                color: #f44336;
+                display: none;
+            }
+
+            textarea[invalid] + .error-message {
+                display: block;
+            }
+
+            .show-html {
+                display: none;
+                font-size: 1.1rem;
+                width: 60%;
+            }
+
+            #show-code-switch:checked ~ .show-html {
+                display: block;
+            }
+
+            label {
+                font-size: 2rem;
+                cursor: pointer;
+            }
+
+            #show-code-switch {
+                appearance: none;
             }
         </style>
     </head>
@@ -46,45 +76,76 @@
                 <p><b>Try it out by modifying the following attributes:</b></p>
 
                 <p>My name is: u.name</p>
-                <p>My favorite animals are: u.favoriteAnimals</p>
-                <p>My favorite programming languages are:</p>
-                <p>(Set array to user.favoriteProgrammingLanguages)</p>
-                <stoxy-repeat key="user.favoriteProgrammingLanguages" id="progLang">
-                    <li>progLang</li>
-                </stoxy-repeat>
+                <p>My favorite animal is: u.favoriteAnimal</p>
             </stoxy-object>
+
+            <p>My favorite programming languages are:</p>
+            <stoxy-repeat key="user.favoriteProgrammingLanguages" id="progLang">
+                <li>progLang</li>
+            </stoxy-repeat>
         </div>
 
         <div class="information-modification">
-            <!-- prettier-ignore -->
-            <textarea cols="40" rows="16">
-{
-    "name": "Matsu"
-}
-</textarea>
+            <textarea cols="40" rows="16"></textarea>
+            <p class="error-message">JSON data invalid</p>
         </div>
+
+        <input type="checkbox" id="show-code-switch" />
+        <label for="show-code-switch">Show code</label>
+        <div class="show-html">
+            <pre>
+                <code>
+    &lt;h2&gt;Hello, &lt;stoxy-string default=&quot;World&quot;&gt;user.name!&lt;/stoxy-string&gt;&lt;/h2&gt;
+
+    &lt;p&gt;With stoxy you can easily create dynamic content without any javascript in you HTML&lt;/p&gt;
+
+    &lt;stoxy-object key=&quot;user&quot; prefix=&quot;u.&quot;&gt;
+        &lt;p&gt;&lt;b&gt;Try it out by modifying the following attributes:&lt;/b&gt;&lt;/p&gt;
+
+        &lt;p&gt;My name is: u.name&lt;/p&gt;
+        &lt;p&gt;My favorite animal is: u.favoriteAnimal&lt;/p&gt;
+    &lt;/stoxy-object&gt;
+
+    &lt;p&gt;My favorite programming languages are:&lt;/p&gt;
+    &lt;stoxy-repeat key=&quot;user.favoriteProgrammingLanguages&quot; id=&quot;progLang&quot;&gt;
+        &lt;li&gt;progLang&lt;/li&gt; 
+    &lt;/stoxy-repeat&gt; 
+                </code>
+            </pre>
+        </div>
+
         <script type="module">
             import 'stoxy/stoxy-repeat';
             import 'stoxy/stoxy-object';
             import 'stoxy/stoxy-string';
             import { write } from 'stoxy';
 
+            const textarea = document.querySelector('textarea');
+            init();
+
+            function init() {
+                const initialData = {
+                    name: 'Matsu',
+                    favoriteAnimal: 'Cats',
+                    favoriteProgrammingLanguages: ['Javascript', 'Java'],
+                };
+                textarea.value = JSON.stringify(initialData, null, 2);
+                write('user', initialData);
+            }
+
             let previousContent = '';
-            document.querySelector('textarea').addEventListener('keyup', e => {
+            textarea.addEventListener('keyup', e => {
                 const data = e.target.value;
                 if (data == previousContent) return;
                 previousContent = data;
                 let jsonData;
                 try {
                     jsonData = JSON.parse(data);
+                    e.target.removeAttribute('invalid');
+                    write('user', jsonData);
                 } catch (err) {
                     e.target.setAttribute('invalid', '');
-                    console.log('Invalid json', err);
-                    return;
                 }
-                e.target.removeAttribute('invalid');
-                console.log('Successfull');
-                write('user', jsonData);
             });
         </script>
     </body>

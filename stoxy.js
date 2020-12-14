@@ -16,7 +16,17 @@ export default class Stoxy extends HTMLElement {
         });
     }
 
-    setNoDataValue() {}
+    getNoDataValue() {
+        if (!this.hasAttribute('default')) {
+            return this.placeholderKey;
+        } else {
+            return this.getAttribute('default');
+        }
+    }
+
+    get placeholderKey() {
+        return this.key;
+    }
 
     stoxyUpdate(event) {}
 
@@ -27,11 +37,11 @@ export default class Stoxy extends HTMLElement {
     }
 
     _replaceObject(newContent, regexKey, keyData) {
-        console.log(regexKey);
         if (!newContent.includes(regexKey)) {
             return newContent;
         }
-        const objectPropertyRegex = new RegExp(`${regexKey}[^ <>]*`, 'g');
+        // TODO: Set all special signs to the ignore list in the regex below
+        const objectPropertyRegex = new RegExp(`${regexKey}[^ <>!?]*`, 'g');
         const regexKeys = newContent.match(objectPropertyRegex);
         const foundProperties = regexKeys.map(k => k.replace(`${regexKey}.`, ''));
         for (const prop of foundProperties) {
@@ -51,7 +61,7 @@ export default class Stoxy extends HTMLElement {
 
     _replaceString(newContent, regexKey, keyData) {
         if (typeof keyData === 'undefined' || keyData === 'undefined') {
-            keyData = regexKey;
+            return this.getNoDataValue();
         }
         const regexString = regexKey.replace('.', '.') + '(?=|[^.-])';
         return newContent.replace(new RegExp(regexString, 'g'), keyData);

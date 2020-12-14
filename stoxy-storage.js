@@ -38,12 +38,10 @@ export function read(key) {
     return new Promise((resolve, reject) => {
         const cachedObject = fetchFromCache(key);
         if (cachedObject) {
-            console.log('Cache hit');
             return resolve(cachedObject);
         }
 
         openStorage().then(db => {
-            console.log('Read Transaction started, because key ' + key + ' was not in the cache');
             const transaction = db.transaction([STOXY_DATA_STORAGE], 'readwrite');
             transaction.onerror = event => {
                 reject(event);

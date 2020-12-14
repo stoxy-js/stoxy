@@ -2,8 +2,8 @@ import Stoxy from './stoxy.js';
 import { read } from './stoxy-storage.js';
 
 class StoxyString extends Stoxy {
-    setNoDataValue() {
-        this.stoxyUpdate(this._getKeyAndPartsAsString());
+    get placeholderKey() {
+        return this._getKeyAndPartsAsString();
     }
 
     _getKeyAndPartsAsString() {
@@ -11,7 +11,7 @@ class StoxyString extends Stoxy {
     }
 
     _parseKey() {
-        const key = this.innerHTML;
+        const key = this.innerHTML.trim();
         const keyParts = key.split('.');
         this.key = keyParts.shift();
         this.parts = keyParts;

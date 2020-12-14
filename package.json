@@ -6,7 +6,8 @@
   "scripts": {
     "start": "wds --node-resolve --watch --open",
     "example:basic": "cd examples/basic-example && npm start",
-    "example:translation": "wds --node-resolve --watch --open --app-index examples/translation-example"
+    "example:translation": "wds --node-resolve --watch --open --app-index examples/translation-example",
+    "example:full": "cd examples/full-example && npm start"
   },
   "author": "",
   "license": "ISC",

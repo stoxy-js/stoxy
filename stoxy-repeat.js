@@ -4,16 +4,26 @@ import { read } from './stoxy-storage.js';
 class StoxyRepeat extends Stoxy {
     constructor() {
         super();
-        this.key = this.getAttribute('key');
+        this.fullKey = this.getAttribute('key');
+        this.key = this.fullKey.split('.').shift();
         this.content = this.innerHTML;
     }
 
     stoxyUpdate(data) {
         if (!data) return;
 
+        const iterableData = this._getIterableData(data);
+        if (!iterableData) {
+            this.innerHTML = ``;
+            return;
+        }
+        if (this.arrayIsUnchanged(iterableData)) {
+            return;
+        }
+        this.iterableData = iterableData;
+
         const contentTemplate = this.content;
         let newContent = '';
-        const iterableData = this._getIterableData(data);
         for (const itData of iterableData) {
             // If wanted value is just a string, we can just easily replace it
             if (typeof itData !== 'object') {
@@ -26,6 +36,15 @@ class StoxyRepeat extends Stoxy {
         this.innerHTML = newContent;
     }
 
+    arrayIsUnchanged(iterableData) {
+        return (
+            Array.isArray(this.iterableData) &&
+            Array.isArray(iterableData) &&
+            this.iterableData.length === iterableData.length &&
+            this.iterableData.every((val, index) => val === iterableData[index])
+        );
+    }
+
     /**
      * if the key provided was a property of object, search
      * the wanted value.
@@ -34,8 +53,8 @@ class StoxyRepeat extends Stoxy {
      * would access user["profileInfo"]["languages"]
      * */
     _getIterableData(data) {
-        if (!this.key.includes('.')) return data;
-        const parts = this.key.split('.');
+        if (!this.fullKey.includes('.')) return data;
+        const parts = this.fullKey.split('.');
         parts.shift(); // Remove the main key
         let d = data;
         while (parts.length > 0) {
