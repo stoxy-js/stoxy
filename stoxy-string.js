@@ -19,13 +19,15 @@ class StoxyString extends Stoxy {
 
     stoxyUpdate(data) {
         if (!data) return;
+        let content;
         if (typeof data === 'object') {
             const contentKey = this._getKeyAndPartsAsString();
-            const content = this._replaceObject(contentKey, this.key, data);
-            this.innerHTML = content;
+            content = this._replaceObject(contentKey, this.key, data);
         } else {
-            this.innerHTML = data;
+            content = data;
         }
+        this._updateContent(content);
+        this._setReady(true);
     }
 
     async stoxyInit() {

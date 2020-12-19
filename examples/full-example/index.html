@@ -9,6 +9,19 @@
 
         <script type="module" src="https://cdn.jsdelivr.net/npm/highlight-js-wc@1.0.0/highlight-js-wc.min.js"></script>
         <style>
+            stoxy-string,
+            stoxy-object *,
+            stoxy-repeat * {
+                opacity: 0;
+                transition: 200ms;
+            }
+
+            stoxy-string[ready],
+            stoxy-object[ready] *,
+            stoxy-repeat[ready] * {
+                opacity: 1;
+            }
+
             body {
                 font-family: 'Roboto', sans-serif;
                 padding: 0;
@@ -77,12 +90,12 @@
 
                 <p>My name is: u.name</p>
                 <p>My favorite animal is: u.favoriteAnimal</p>
-            </stoxy-object>
 
-            <p>My favorite programming languages are:</p>
-            <stoxy-repeat key="user.favoriteProgrammingLanguages" id="progLang">
-                <li>progLang</li>
-            </stoxy-repeat>
+                <p>My favorite programming languages are:</p>
+                <stoxy-repeat key="user.favoriteProgrammingLanguages" id="progLang">
+                    <li>progLang</li>
+                </stoxy-repeat>
+            </stoxy-object>
         </div>
 
         <div class="information-modification">
@@ -118,7 +131,7 @@
             import 'stoxy/stoxy-repeat';
             import 'stoxy/stoxy-object';
             import 'stoxy/stoxy-string';
-            import { write } from 'stoxy';
+            import { write, read } from 'stoxy';
 
             const textarea = document.querySelector('textarea');
             init();
@@ -130,7 +143,11 @@
                     favoriteProgrammingLanguages: ['Javascript', 'Java'],
                 };
                 textarea.value = JSON.stringify(initialData, null, 2);
-                write('user', initialData);
+                read('user').then(userData => {
+                    if (!userData) {
+                        write('user', initialData);
+                    }
+                });
             }
 
             let previousContent = '';
@@ -138,6 +155,7 @@
                 const data = e.target.value;
                 if (data == previousContent) return;
                 previousContent = data;
+
                 let jsonData;
                 try {
                     jsonData = JSON.parse(data);

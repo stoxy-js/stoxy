@@ -28,7 +28,8 @@ class StoxyObject extends Stoxy {
                 newContent = this._replaceString(newContent, regexKey, keyData);
             }
         });
-        this.innerHTML = newContent;
+        this._updateContent(newContent);
+        this._setReady(true);
     }
 
     async stoxyInit() {

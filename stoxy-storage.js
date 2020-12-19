@@ -1,5 +1,13 @@
 import { INIT_SUCCESS, PUT_SUCCESS, READ_SUCCESS, DELETE_SUCCESS } from './stoxy-events.js';
 
+// TODO's:
+//
+// - Finish cacheing
+// - Create a fetch queue (no need for all of the simoutaneous requests to
+// access the db, just make them all listen to one promise and handle the resolved value)
+// - Make implementation for cases where indexedDB doesn't work (just rely on cache, and se cache size
+// to like Max int
+
 const STOXY_VERSION_NUMBER = 1;
 const STOXY_DATA_STORAGE = 'StoxyStorage';
 const STOXY_CACHE_SIZE = 5;
@@ -71,8 +79,9 @@ function updateCache(key, data) {
         cacheKeys.push(key);
     }
     cache[key] = data;
-    if (cacheKeys.length > 5) {
+    if (cacheKeys.length > STOXY_CACHE_SIZE) {
         const keyToRemove = cacheKeys.shift();
+        // Make this work nicer. delete is a ugly way to do this. Object.fromentries etc. is better
         delete cache[keyToRemove];
     }
 }

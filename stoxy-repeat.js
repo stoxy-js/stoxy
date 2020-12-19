@@ -25,15 +25,19 @@ class StoxyRepeat extends Stoxy {
         const contentTemplate = this.content;
         let newContent = '';
         for (const itData of iterableData) {
-            // If wanted value is just a string, we can just easily replace it
             if (typeof itData !== 'object') {
                 newContent += this._replaceString(contentTemplate, this.id, itData);
-                continue;
             } else {
                 newContent += this._replaceObject(contentTemplate, `${this.id}`, itData);
             }
         }
+        // TODO: Check if we could use the same update here as others
+        // A problem might arise due to the repeat but let's see.
+        // Maybe iterate through and call the function and add those
+        // Maybe need to separate the concerns?
+        // Or maybe just make the master update function handle arrays.
         this.innerHTML = newContent;
+        this._setReady(true);
     }
 
     arrayIsUnchanged(iterableData) {
