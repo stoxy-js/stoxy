@@ -58,7 +58,9 @@ export default class Stoxy extends HTMLElement {
         // To access the childNodes, we must have a context for our content
         const newContentContext = document.createRange().createContextualFragment(newContent);
         const newContentNodes = newContentContext.childNodes;
-        this.childNodes.forEach(async (node, i) => {
+        const childNodes = this.childNodes;
+        console.log('UpdateContent', { newContent, newContentNodes, childNodes });
+        childNodes.forEach(async (node, i) => {
             // Skip Stoxy instances
             if (node.nodeName.includes('STOXY')) return;
             const nodeValue = node.nodeValue;
@@ -75,11 +77,12 @@ export default class Stoxy extends HTMLElement {
     }
 
     _replaceObject(newContent, regexKey, keyData) {
+        console.log('Replaceobject ', { newContent, regexKey, keyData, includes: !newContent.includes(regexKey) });
         if (!newContent.includes(regexKey)) {
             return newContent;
         }
         // TODO: Set all special signs to the ignore list in the regex below
-        const objectPropertyRegex = new RegExp(`${regexKey}[^ <>!?,*=-]*`, 'g');
+        const objectPropertyRegex = new RegExp(`${regexKey}[\.A-Za-z0-9]*[^(. $)]`, 'g');
         const regexKeys = newContent.match(objectPropertyRegex);
         const foundProperties = regexKeys.map(k => k.replace(`${regexKey}.`, ''));
         for (const prop of foundProperties) {

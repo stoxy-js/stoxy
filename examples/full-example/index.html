@@ -88,7 +88,7 @@
             <stoxy-object key="user" prefix="u.">
                 <p><b>Try it out by modifying the following attributes:</b></p>
 
-                <p>My name is: u.name</p>
+                <p>My name is: u.name, and I'm from u.country.countryName (u.country.countryCode).</p>
                 <p>My favorite animal is: u.favoriteAnimal</p>
 
                 <p>My favorite programming languages are:</p>
@@ -139,6 +139,10 @@
             function init() {
                 const initialData = {
                     name: 'Matsu',
+                    country: {
+                        countryName: 'Finland',
+                        countryCode: 'FI',
+                    },
                     favoriteAnimal: 'Cats',
                     favoriteProgrammingLanguages: ['Javascript', 'Java'],
                 };
