@@ -1,19 +1,17 @@
 import { INIT_SUCCESS, PUT_SUCCESS, READ_SUCCESS, DELETE_SUCCESS } from './stoxy-events.js';
 
-// TODO's:
-//
-// - Finish cacheing
-// - Create a fetch queue (no need for all of the simoutaneous requests to
-// access the db, just make them all listen to one promise and handle the resolved value)
-// - Make implementation for cases where indexedDB doesn't work (just rely on cache, and se cache size
-// to like Max int
-
 const STOXY_VERSION_NUMBER = 1;
 const STOXY_DATA_STORAGE = 'StoxyStorage';
 const STOXY_CACHE_SIZE = 5;
 
 const cacheKeys = [];
 const cache = {};
+
+const readQueue = {};
+
+function canUseIDB() {
+    return Boolean(window.indexedDB);
+}
 
 function doEvent(name, data) {
     if (!data) {
@@ -24,6 +22,7 @@ function doEvent(name, data) {
 }
 
 export function openStorage() {
+    if (!canUseIDB()) return;
     return new Promise((resolve, reject) => {
         const request = window.indexedDB.open(STOXY_DATA_STORAGE, STOXY_VERSION_NUMBER);
         request.onsuccess = event => {
@@ -43,9 +42,12 @@ function upgrade(event) {
 }
 
 export function read(key) {
-    return new Promise((resolve, reject) => {
+    if (readQueue[key]) {
+        return readQueue[key];
+    }
+    const readPromise = new Promise((resolve, reject) => {
         const cachedObject = fetchFromCache(key);
-        if (cachedObject) {
+        if (cachedObject || !canUseIDB()) {
             return resolve(cachedObject);
         }
 
@@ -63,10 +65,14 @@ export function read(key) {
                     updateCache(key, resultData);
                 }
                 doEvent(READ_SUCCESS, { key, data: resultData });
+
+                delete readQueue[key];
                 resolve(resultData);
             };
         });
     });
+    readQueue[key] = readPromise;
+    return readPromise;
 }
 
 function fetchFromCache(key) {
@@ -79,9 +85,8 @@ function updateCache(key, data) {
         cacheKeys.push(key);
     }
     cache[key] = data;
-    if (cacheKeys.length > STOXY_CACHE_SIZE) {
+    if (canUseIDB() && cacheKeys.length > STOXY_CACHE_SIZE) {
         const keyToRemove = cacheKeys.shift();
-        // Make this work nicer. delete is a ugly way to do this. Object.fromentries etc. is better
         delete cache[keyToRemove];
     }
 }
@@ -99,6 +104,11 @@ function invalidateCache(key) {
 
 export function write(key, data) {
     return new Promise((resolve, reject) => {
+        if (!canUseIDB()) {
+            updateCache(key, data);
+            doEvent(PUT_SUCCESS, { key, data });
+            return resolve();
+        }
         openStorage().then(db => {
             const transaction = db.transaction([STOXY_DATA_STORAGE], 'readwrite');
             transaction.oncomplete = event => {
@@ -118,6 +128,11 @@ export function write(key, data) {
 
 export function del(key) {
     return new Promise((resolve, reject) => {
+        if (!canUseIDB()) {
+            invalidateCache(key);
+            doEvent(DELETE_SUCCESS, { key });
+            return resolve();
+        }
         openStorage().then(db => {
             const transaction = db.transaction([STOXY_DATA_STORAGE], 'readwrite');
             transaction.oncomplete = event => {
