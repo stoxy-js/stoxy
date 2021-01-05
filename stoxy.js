@@ -59,29 +59,30 @@ export default class Stoxy extends HTMLElement {
         const newContentContext = document.createRange().createContextualFragment(newContent);
         const newContentNodes = newContentContext.childNodes;
         const childNodes = this.childNodes;
-        console.log('UpdateContent', { newContent, newContentNodes, childNodes });
         childNodes.forEach(async (node, i) => {
             // Skip Stoxy instances
             if (node.nodeName.includes('STOXY')) return;
             const nodeValue = node.nodeValue;
             if (nodeValue && nodeValue.trim().length > 0) {
-                node.nodeValue = newContentNodes[i].nodeValue;
+                if (nodeValue !== newContentNodes[i].nodeValue) {
+                    node.nodeValue = newContentNodes[i].nodeValue;
+                }
                 return;
             }
             const nodeHTML = node.innerHTML;
             if (nodeHTML && nodeHTML.trim().length > 0) {
-                node.innerHTML = newContentNodes[i].innerHTML;
-                return;
+                // If the content didn't change, don't touch it
+                if (nodeHTML !== newContentNodes[i].innerHTML) {
+                    node.innerHTML = newContentNodes[i].innerHTML;
+                }
             }
         });
     }
 
     _replaceObject(newContent, regexKey, keyData) {
-        console.log('Replaceobject ', { newContent, regexKey, keyData, includes: !newContent.includes(regexKey) });
         if (!newContent.includes(regexKey)) {
             return newContent;
         }
-        // TODO: Set all special signs to the ignore list in the regex below
         const objectPropertyRegex = new RegExp(`${regexKey}[\.A-Za-z0-9]*[^(. $)]`, 'g');
         const regexKeys = newContent.match(objectPropertyRegex);
         const foundProperties = regexKeys.map(k => k.replace(`${regexKey}.`, ''));

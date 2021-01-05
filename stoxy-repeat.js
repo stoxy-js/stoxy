@@ -7,6 +7,7 @@ class StoxyRepeat extends Stoxy {
         this.fullKey = this.getAttribute('key');
         this.key = this.fullKey.split('.').shift();
         this.content = this.innerHTML;
+        this.originalNodes = this.childNodes;
     }
 
     stoxyUpdate(data) {
@@ -23,20 +24,20 @@ class StoxyRepeat extends Stoxy {
         this.iterableData = iterableData;
 
         const contentTemplate = this.content;
-        let newContent = '';
+        let newContent = [];
         for (const itData of iterableData) {
             if (typeof itData !== 'object') {
-                newContent += this._replaceString(contentTemplate, this.id, itData);
+                newContent.push(this._replaceString(contentTemplate, this.id, itData));
             } else {
-                newContent += this._replaceObject(contentTemplate, `${this.id}`, itData);
+                newContent.push(this._replaceObject(contentTemplate, `${this.id}`, itData));
             }
         }
-        // TODO: Check if we could use the same update here as others
-        // A problem might arise due to the repeat but let's see.
-        // Maybe iterate through and call the function and add those
-        // Maybe need to separate the concerns?
-        // Or maybe just make the master update function handle arrays.
-        this.innerHTML = newContent;
+        // This has to use the ugly innerHTML for now at least since the
+        // updating of single elements can be iffy when working with arrays.
+        //
+        // If you ever come up with a solution that allows to only update needed keys of list,
+        // implement it, but for now this has to do.
+        this.innerHTML = newContent.reduce((a, b) => `${a}${b}`);
         this._setReady(true);
     }
 

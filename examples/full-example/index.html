@@ -82,17 +82,17 @@
 
     <body>
         <div class="user-information">
-            <h2>Hello, <stoxy-string default="World">user.name!</stoxy-string></h2>
+            <h2>Hello, <stoxy-string default="World">stoxy-user-demo.name!</stoxy-string></h2>
 
             <p>With stoxy you can easily create dynamic content without any javascript in you HTML</p>
-            <stoxy-object key="user" prefix="u.">
+            <stoxy-object key="stoxy-user-demo" prefix="u.">
                 <p><b>Try it out by modifying the following attributes:</b></p>
 
                 <p>My name is: u.name, and I'm from u.country.countryName (u.country.countryCode).</p>
                 <p>My favorite animal is: u.favoriteAnimal</p>
 
                 <p>My favorite programming languages are:</p>
-                <stoxy-repeat key="user.favoriteProgrammingLanguages" id="progLang">
+                <stoxy-repeat key="stoxy-user-demo.favoriteProgrammingLanguages" id="progLang">
                     <li>progLang</li>
                 </stoxy-repeat>
             </stoxy-object>
@@ -133,23 +133,27 @@
             import 'stoxy/stoxy-string';
             import { write, read } from 'stoxy';
 
+            const userDataKey = 'stoxy-user-demo';
+
             const textarea = document.querySelector('textarea');
             init();
 
             function init() {
-                const initialData = {
-                    name: 'Matsu',
-                    country: {
-                        countryName: 'Finland',
-                        countryCode: 'FI',
-                    },
-                    favoriteAnimal: 'Cats',
-                    favoriteProgrammingLanguages: ['Javascript', 'Java'],
-                };
-                textarea.value = JSON.stringify(initialData, null, 2);
-                read('user').then(userData => {
+                read(userDataKey).then(userData => {
                     if (!userData) {
-                        write('user', initialData);
+                        const initialData = {
+                            name: 'Matsu',
+                            country: {
+                                countryName: 'Finland',
+                                countryCode: 'FI',
+                            },
+                            favoriteAnimal: 'Cats',
+                            favoriteProgrammingLanguages: ['Javascript', 'Java'],
+                        };
+                        textarea.value = JSON.stringify(initialData, null, 2);
+                        write(userDataKey, initialData);
+                    } else {
+                        textarea.value = JSON.stringify(userData, null, 2);
                     }
                 });
             }
@@ -164,7 +168,7 @@
                 try {
                     jsonData = JSON.parse(data);
                     e.target.removeAttribute('invalid');
-                    write('user', jsonData);
+                    write(userDataKey, jsonData);
                 } catch (err) {
                     e.target.setAttribute('invalid', '');
                 }
