@@ -95,36 +95,19 @@
                 <stoxy-repeat key="stoxy-user-demo.favoriteProgrammingLanguages" id="progLang">
                     <li>progLang</li>
                 </stoxy-repeat>
+
+                <p>Favorite games:</p>
+                <stoxy-repeat key="stoxy-user-demo.favoriteGames" id="game">
+                    <p>Name: game.name</p>
+                    <p>Genre: game.genre</p>
+                    <p></p>
+                </stoxy-repeat>
             </stoxy-object>
         </div>
 
         <div class="information-modification">
             <textarea cols="40" rows="16"></textarea>
             <p class="error-message">JSON data invalid</p>
-        </div>
-
-        <input type="checkbox" id="show-code-switch" />
-        <label for="show-code-switch">Show code</label>
-        <div class="show-html">
-            <pre>
-                <code>
-    &lt;h2&gt;Hello, &lt;stoxy-string default=&quot;World&quot;&gt;user.name!&lt;/stoxy-string&gt;&lt;/h2&gt;
-
-    &lt;p&gt;With stoxy you can easily create dynamic content without any javascript in you HTML&lt;/p&gt;
-
-    &lt;stoxy-object key=&quot;user&quot; prefix=&quot;u.&quot;&gt;
-        &lt;p&gt;&lt;b&gt;Try it out by modifying the following attributes:&lt;/b&gt;&lt;/p&gt;
-
-        &lt;p&gt;My name is: u.name&lt;/p&gt;
-        &lt;p&gt;My favorite animal is: u.favoriteAnimal&lt;/p&gt;
-    &lt;/stoxy-object&gt;
-
-    &lt;p&gt;My favorite programming languages are:&lt;/p&gt;
-    &lt;stoxy-repeat key=&quot;user.favoriteProgrammingLanguages&quot; id=&quot;progLang&quot;&gt;
-        &lt;li&gt;progLang&lt;/li&gt; 
-    &lt;/stoxy-repeat&gt; 
-                </code>
-            </pre>
         </div>
 
         <script type="module">
@@ -139,6 +122,7 @@
             init();
 
             function init() {
+                write('testing-data', { foo: 'bar' });
                 read(userDataKey).then(userData => {
                     if (!userData) {
                         const initialData = {
@@ -149,6 +133,10 @@
                             },
                             favoriteAnimal: 'Cats',
                             favoriteProgrammingLanguages: ['Javascript', 'Java'],
+                            favoriteGames: [
+                                { genre: 'RTS', name: 'StarCraft' },
+                                { genre: 'MMORPG', name: 'World of Warcraft' },
+                            ],
                         };
                         textarea.value = JSON.stringify(initialData, null, 2);
                         write(userDataKey, initialData);

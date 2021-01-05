@@ -26,6 +26,7 @@ class StoxyRepeat extends Stoxy {
         const contentTemplate = this.content;
         let newContent = [];
         for (const itData of iterableData) {
+            console.log(itData);
             if (typeof itData !== 'object') {
                 newContent.push(this._replaceString(contentTemplate, this.id, itData));
             } else {
