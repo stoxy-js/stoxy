@@ -58,7 +58,7 @@ With Stoxy, the same markdown could be created without being in the same context
 ## 🔔 Reactivity
 
 Stoxy is a reactive state management system, meaning that when you update the data in Stoxy with the `write` command,
-all of the elements using that object will update automatically their content in the DOM.
+all of the elements using that object will automatically update their content in the DOM.
 
 No more need for flowing data around the whole system.
 
@@ -75,6 +75,8 @@ write('user', newData);
 Stoxy will not update any element which's data didn't change, enhancing the performance greatly.
 
 **_ Only the DOM elements which had their data changed will be updated _**
+
+![Stoxy Demo](assets/stoxy-demo.gif)
 
 ## 🧰 Installation
 

@@ -7,14 +7,16 @@ class StoxyRepeat extends Stoxy {
         this.fullKey = this.getAttribute('key');
         this.key = this.fullKey.split('.').shift();
         this.content = this.innerHTML;
-        this.originalNodes = this.childNodes;
     }
 
     stoxyUpdate(data) {
-        if (!data) return;
+        if (!data) {
+            this.innerHTML = '';
+            return;
+        }
 
         const iterableData = this._getIterableData(data);
-        if (!iterableData) {
+        if (!iterableData || iterableData.length < 1) {
             this.innerHTML = ``;
             return;
         }
@@ -26,13 +28,13 @@ class StoxyRepeat extends Stoxy {
         const contentTemplate = this.content;
         let newContent = [];
         for (const itData of iterableData) {
-            console.log(itData);
             if (typeof itData !== 'object') {
                 newContent.push(this._replaceString(contentTemplate, this.id, itData));
             } else {
                 newContent.push(this._replaceObject(contentTemplate, `${this.id}`, itData));
             }
         }
+        if (newContent.length < 1) return;
         // This has to use the ugly innerHTML for now at least since the
         // updating of single elements can be iffy when working with arrays.
         //

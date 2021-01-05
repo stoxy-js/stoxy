@@ -88,7 +88,6 @@ export default class Stoxy extends HTMLElement {
         const regexKeys = newContent.match(objectPropertyRegex);
         const foundProperties = regexKeys.map(k => k.replace(`${regexKey}.`, ''));
         for (const prop of foundProperties) {
-            console.log(prop);
             if (prop.includes('.')) {
                 const regexKeyAddition = prop.split('.')[0];
                 newContent = this._replaceObject(

@@ -1,6 +1,6 @@
 {
   "name": "stoxy",
-  "version": "0.0.10",
+  "version": "1.0.0",
   "description": "Stoxy is a state management tool used for easy access to frequently used data without the hassle of template strings.",
   "main": "stoxy.js",
   "scripts": {
