@@ -8,12 +8,11 @@ class StoxyObject extends Stoxy {
         this.content = this.innerHTML;
     }
 
-    setNoDataValue() {
-        this.stoxyUpdate(this.key);
-    }
-
     stoxyUpdate(data) {
-        if (!data) return;
+        if (!data) {
+            this._updateContent(this.content);
+            return;
+        }
         const prefix = this.getAttribute('prefix');
         const keys = Object.keys(data);
         let newContent = this.content;

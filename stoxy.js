@@ -30,7 +30,7 @@ export default class Stoxy extends HTMLElement {
         });
         window.addEventListener(DELETE_SUCCESS, e => {
             if (e.detail.key === this.key) {
-                this.setNoDataValue();
+                this.stoxyUpdate();
             }
         });
         this.stoxyInit();
@@ -118,4 +118,4 @@ export default class Stoxy extends HTMLElement {
     window.STOXY_INITIALIZED = true;
 })();
 
-export { openStorage, read, write, del } from './stoxy-storage.js';
+export { openStorage, read, write, del, sub } from './stoxy-storage.js';

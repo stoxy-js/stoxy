@@ -114,9 +114,11 @@
             import 'stoxy/stoxy-repeat';
             import 'stoxy/stoxy-object';
             import 'stoxy/stoxy-string';
-            import { write, read } from 'stoxy';
+            import { write, read, sub, del } from 'stoxy';
 
             const userDataKey = 'stoxy-user-demo';
+
+            sub(userDataKey, data => console.log(data));
 
             const textarea = document.querySelector('textarea');
             init();

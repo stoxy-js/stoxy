@@ -15,10 +15,27 @@ function canUseIDB() {
 
 function doEvent(name, data) {
     if (!data) {
-        window.dispatchEvent(new Event('name'));
+        window.dispatchEvent(new Event(name));
         return;
     }
     window.dispatchEvent(new CustomEvent(name, { detail: data }));
+}
+
+export function sub(key, callback) {
+    window.addEventListener(PUT_SUCCESS, e => {
+        if (e.detail.key === key) {
+            const putEvent = e.detail;
+            putEvent.action = 'Update';
+            callback(e.detail);
+        }
+    });
+    window.addEventListener(DELETE_SUCCESS, e => {
+        if (e.detail.key === key) {
+            const delEvent = e.detail;
+            delEvent.action = 'Delete';
+            callback(delEvent);
+        }
+    });
 }
 
 export function openStorage() {
