@@ -7,8 +7,6 @@ const STOXY_CACHE_SIZE = 5;
 const cacheKeys = [];
 const cache = {};
 
-const readQueue = {};
-
 function canUseIDB() {
     return Boolean(window.indexedDB);
 }
@@ -58,43 +56,9 @@ function upgrade(event) {
     db.createObjectStore(STOXY_DATA_STORAGE);
 }
 
-export function read(key) {
-    if (readQueue[key]) {
-        return readQueue[key];
-    }
-    const readPromise = new Promise((resolve, reject) => {
-        const cachedObject = fetchFromCache(key);
-        if (cachedObject || !canUseIDB()) {
-            return resolve(cachedObject);
-        }
-
-        openStorage().then(db => {
-            const transaction = db.transaction([STOXY_DATA_STORAGE], 'readwrite');
-            transaction.onerror = event => {
-                reject(event);
-            };
-
-            const objectStore = transaction.objectStore(STOXY_DATA_STORAGE);
-            const readRequest = objectStore.get(key);
-            readRequest.onsuccess = event => {
-                const resultData = event.target.result;
-                if (resultData) {
-                    updateCache(key, resultData);
-                }
-                doEvent(READ_SUCCESS, { key, data: resultData });
-
-                delete readQueue[key];
-                resolve(resultData);
-            };
-        });
-    });
-    readQueue[key] = readPromise;
-    return readPromise;
-}
-
 function fetchFromCache(key) {
     const cachedObject = cache[key];
-    return cachedObject ? cachedObject : null;
+    return cachedObject != null ? cachedObject : null;
 }
 
 function updateCache(key, data) {
@@ -117,6 +81,39 @@ function invalidateCache(key) {
     }
     cacheKeys.splice(cacheKeys.indexOf(key), 1);
     delete cache[key];
+}
+
+export function read(key) {
+    const readPromise = new Promise((resolve, reject) => {
+        const cachedObject = fetchFromCache(key);
+        if (cachedObject || !canUseIDB()) {
+            // To prevent direct array reference. Needed for stoxy repeat to work when e.g. sorting
+            if (Array.isArray(cachedObject)) {
+                return resolve([...cachedObject]);
+            }
+            return resolve(cachedObject);
+        }
+
+        openStorage().then(db => {
+            const transaction = db.transaction([STOXY_DATA_STORAGE], 'readwrite');
+            transaction.onerror = event => {
+                reject(event);
+            };
+
+            const objectStore = transaction.objectStore(STOXY_DATA_STORAGE);
+            const readRequest = objectStore.get(key);
+            readRequest.onsuccess = event => {
+                const resultData = event.target.result;
+                if (resultData) {
+                    updateCache(key, resultData);
+                }
+                doEvent(READ_SUCCESS, { key, data: resultData });
+
+                resolve(resultData);
+            };
+        });
+    });
+    return readPromise;
 }
 
 export function write(key, data) {
@@ -164,5 +161,19 @@ export function del(key) {
             const objectStore = transaction.objectStore(STOXY_DATA_STORAGE);
             objectStore.delete(key);
         });
+    });
+}
+
+export function add(key, data) {
+    read(key).then(keyData => {
+        if (!keyData) keyData = [];
+        write(key, [...keyData, data]);
+    });
+}
+
+export function remove(key, predicate) {
+    read(key).then(keyData => {
+        if (!keyData) return;
+        write(key, keyData.filter(d => !predicate(d)));
     });
 }

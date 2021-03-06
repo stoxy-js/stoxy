@@ -1,0 +1,41 @@
+{
+  "devDependencies": {
+    "@open-wc/eslint-config": "^4.2.0",
+    "@web/dev-server": "^0.1.1",
+    "husky": "^1.0.0",
+    "lint-staged": "^10.0.0",
+    "prettier": "^2.0.4"
+  },
+  "scripts": {
+    "lint": "eslint --ext .js,.html . --ignore-path .gitignore && prettier \"**/*.js\" --check --ignore-path .gitignore",
+    "format": "eslint --ext .js,.html . --fix --ignore-path .gitignore && prettier \"**/*.js\" --write --ignore-path .gitignore",
+    "start": "web-dev-server"
+  },
+  "name": "todo-app",
+  "version": "0.0.0",
+  "description": "Webcomponent todo-app following open-wc recommendations",
+  "author": "todo-app",
+  "license": "MIT",
+  "dependencies": {
+    "lit-element": "^2.0.1",
+    "lit-html": "^1.0.0",
+    "stoxy": "file:../.."
+  },
+  "eslintConfig": {
+    "extends": [
+      "@open-wc/eslint-config",
+      "eslint-config-prettier"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "arrowParens": "avoid"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  }
+}

@@ -7,6 +7,7 @@ class StoxyRepeat extends Stoxy {
         this.fullKey = this.getAttribute('key');
         this.key = this.fullKey.split('.').shift();
         this.content = this.innerHTML;
+        this.contentNodeCount = document.createRange().createContextualFragment(this.content).length;
     }
 
     stoxyUpdate(data) {
@@ -23,6 +24,10 @@ class StoxyRepeat extends Stoxy {
         if (this.arrayIsUnchanged(iterableData)) {
             return;
         }
+        if (!this.hasAttribute("ready")) {
+            this.innerHTML = "";
+        }
+        const oldData = this.iterableData || [];
         this.iterableData = iterableData;
 
         const contentTemplate = this.content;
@@ -35,13 +40,52 @@ class StoxyRepeat extends Stoxy {
             }
         }
         if (newContent.length < 1) return;
-        // This has to use the ugly innerHTML for now at least since the
-        // updating of single elements can be iffy when working with arrays.
-        //
-        // If you ever come up with a solution that allows to only update needed keys of list,
-        // implement it, but for now this has to do.
-        this.innerHTML = newContent.reduce((a, b) => `${a}${b}`);
+
+        const newContentHTML = newContent.reduce((a, b) => `${a}${b}`);
+
+        const newContentContext = document.createRange().createContextualFragment(newContentHTML);
+        const newContentNodes = [...newContentContext.childNodes];
+        const childNodes = [...this.childNodes];
+
+        const currentNodesMapped = this.mapNodesByName(childNodes);
+        const newNodesMapped = this.mapNodesByName(newContentNodes);
+        // Remove elements that are not present anymore
+        childNodes.forEach(childNode => {
+            const nodesWithSameName = newNodesMapped[childNode.nodeName] || [];
+            const isRemoved = !nodesWithSameName.some(n => childNode.outerHTML === n.outerHTML);
+            if (isRemoved) {
+                childNode.remove();
+            }
+        });
+
+        newContentNodes.forEach(newNode => {
+            const nodesWithSameName = currentNodesMapped[newNode.nodeName] || [];
+            const isPresent = nodesWithSameName.some(n => newNode.outerHTML === n.outerHTML);
+            if (!isPresent) {
+                this.appendChild(newNode.cloneNode(true));
+            }
+        });
+
+        for (let i = 0; i < this.iterableData.length; i++) {
+            /*if (this.iterableData[i] !== oldData[i]) {
+                console.log("Index changed", this.iterableData[i]);
+                const iterationNodesIndex = i + 1 * this.contentNodeCount;
+                
+            }*/
+            const itData = this.iterableData[i];
+        }
+
         this._setReady(true);
+    }
+
+    mapNodesByName(nodes) {
+        const nodesMapped = {};
+        nodes.forEach(n => {
+            const nName = n.nodeName;
+            if (!nodesMapped[nName]) nodesMapped[nName] = [];
+            nodesMapped[nName].push(n);
+        });
+        return nodesMapped;
     }
 
     arrayIsUnchanged(iterableData) {
