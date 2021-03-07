@@ -1,20 +1,9 @@
-import Stoxy from './stoxy.js';
-import { read } from './stoxy-storage.js';
+import Stoxy, { read } from './stoxy.js';
 
 class StoxyString extends Stoxy {
-    get placeholderKey() {
-        return this._getKeyAndPartsAsString();
-    }
-
-    _getKeyAndPartsAsString() {
-        return [this.key, ...this.parts].reduce((a, b) => `${a}.${b}`);
-    }
-
     _parseKey() {
         const key = this.innerHTML.trim();
-        const keyParts = key.split('.');
-        this.key = keyParts.shift();
-        this.parts = keyParts;
+        this.key = key;
     }
 
     stoxyUpdate(data) {
@@ -24,7 +13,6 @@ class StoxyString extends Stoxy {
         }
         let content;
         if (typeof data === 'object') {
-            const contentKey = this._getKeyAndPartsAsString();
             content = this._replaceObject(contentKey, this.key, data);
         } else {
             content = data;
@@ -37,7 +25,7 @@ class StoxyString extends Stoxy {
         this._parseKey();
         const data = await read(this.key);
         if (!data) {
-            this.stoxyUpdate(this.getAttribute('default'));
+            this.stoxyUpdate(this.getAttribute('default') || "");
             return;
         }
         this.stoxyUpdate(data);

@@ -1,5 +1,4 @@
-import Stoxy from './stoxy.js';
-import { read } from './stoxy-storage.js';
+import Stoxy, { read } from './stoxy.js';
 
 class StoxyRepeat extends Stoxy {
     constructor() {

@@ -2,7 +2,8 @@ import { LitElement, html, css } from 'lit-element';
 import './TodoAdder';
 import './TodoEntry';
 import 'stoxy/stoxy-repeat';
-import { clear, read, write } from "stoxy";
+import 'stoxy/stoxy-string';
+import { clear, sub, write } from 'stoxy';
 
 export default class TodoApp extends LitElement {
     static get properties() {
@@ -11,6 +12,14 @@ export default class TodoApp extends LitElement {
                 type: Array,
             },
         };
+    }
+
+    firstUpdated() {
+        sub('todos', this.todosChangeCallback.bind(this));
+    }
+
+    todosChangeCallback(e) {
+        write('todocount', e && e.data ? e.data.length : 0);
     }
 
     static get styles() {
@@ -23,7 +32,7 @@ export default class TodoApp extends LitElement {
         flex-direction: column;
         color: #fff;
         align-items: center;
-          padding-top: 2rem;
+        padding-top: 2rem;
       }
       todo-adder {
         margin-bottom: 2rem;
@@ -37,12 +46,13 @@ export default class TodoApp extends LitElement {
     render() {
         return html`
       <h1>My Todo app</h1>
-      <button @click=${() => clear("todos")}>Clear list</button>
+      <button @click=${() => clear('todos')}>Clear list</button>
       <todo-adder></todo-adder>
 
       <stoxy-repeat key="todos" id="todoTask">
-        <todo-entry task="todoTask"></todo-entry>
+        <todo-entry task="todoTask.task"></todo-entry>
       </stoxy-repeat>
+      <p>Task Count: <stoxy-string default="0">todocount</stoxy-string></p>
     `;
     }
 }

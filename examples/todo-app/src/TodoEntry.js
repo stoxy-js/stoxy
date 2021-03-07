@@ -37,6 +37,10 @@ export default class TodoEntry extends LitElement {
         this.setAttribute("leaving", "");
     }
 
+    disconnectedCallback() {
+        console.log("Disconnected ", this);
+    }
+
     render() {
         return html`<p>${this.task}</p>
 

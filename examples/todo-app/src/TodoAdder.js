@@ -1,34 +1,37 @@
-import { LitElement, html, css } from "lit-element";
-import { add } from "stoxy";
+import { LitElement, html, css } from 'lit-element';
+import 'stoxy/stoxy-form';
 
 export default class TodoAdder extends LitElement {
-    handleSubmit(e) {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const task = formData.get("task");
-
-        add("todos", task);
-        this.shadowRoot.querySelector("input[type='text']").value = "";
-    }
-
     render() {
         return html`
-      <form @submit=${this.handleSubmit}>
-        <input type="text" name="task" placeholder="Add todo..." autocomplete="off" />
+      <stoxy-form
+        key="todos"
+        action="add"
+        url="http://localhost:3000"
+        @submit=${() => {
+                this.shadowRoot.querySelector('input').value = '';
+            }}
+      >
+        <input
+          type="text"
+          name="task"
+          placeholder="Add todo..."
+          autocomplete="off"
+        />
         <input type="submit" value="Submit" />
-      </form>
+      </stoxy-form>
     `;
     }
 
     static get styles() {
         return css`
-      input[type="text"] {
+      input[type='text'] {
         background: transparent;
         font-size: 24px;
         color: #fff;
         border: 2px solid #fff;
       }
-      input[type="submit"] {
+      input[type='submit'] {
         font-size: 24px;
         font-weight: bold;
         color: #fff;
@@ -37,15 +40,14 @@ export default class TodoAdder extends LitElement {
         cursor: pointer;
       }
 
-        input::placeholder,
-        input::-webkit-input-placeholder {
-            color: #FFF;
-        }
+      input::placeholder,
+      input::-webkit-input-placeholder {
+        color: #fff;
+      }
     `;
     }
 }
 
-if (!customElements.get("todo-adder")) {
-    customElements.define("todo-adder", TodoAdder);
+if (!customElements.get('todo-adder')) {
+    customElements.define('todo-adder', TodoAdder);
 }
-

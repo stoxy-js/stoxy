@@ -37,7 +37,7 @@ export function sub(key, callback) {
 }
 
 export function openStorage() {
-    if (!canUseIDB()) return;
+    if (!canUseIDB()) return new Promise(resolve => resolve());
     return new Promise((resolve, reject) => {
         const request = window.indexedDB.open(STOXY_DATA_STORAGE, STOXY_VERSION_NUMBER);
         request.onsuccess = event => {
@@ -95,49 +95,113 @@ export function read(key) {
         }
 
         openStorage().then(db => {
-            const transaction = db.transaction([STOXY_DATA_STORAGE], 'readwrite');
-            transaction.onerror = event => {
-                reject(event);
-            };
-
-            const objectStore = transaction.objectStore(STOXY_DATA_STORAGE);
-            const readRequest = objectStore.get(key);
-            readRequest.onsuccess = event => {
-                const resultData = event.target.result;
-                if (resultData) {
-                    updateCache(key, resultData);
-                }
-                doEvent(READ_SUCCESS, { key, data: resultData });
-
-                resolve(resultData);
-            };
+            readFromStore(key, db, resolve, reject);
         });
     });
     return readPromise;
 }
 
+function readFromStore(key, db, resolve, reject) {
+    const transaction = db.transaction([STOXY_DATA_STORAGE], 'readwrite');
+    transaction.onerror = event => {
+        reject(event);
+    };
+
+    const objectStore = transaction.objectStore(STOXY_DATA_STORAGE);
+
+    if (!key.includes('.')) {
+        const readRequest = objectStore.get(key);
+        readRequest.onsuccess = event => {
+            const resultData = event.target.result;
+            if (resultData) {
+                updateCache(key, resultData);
+            }
+            doEvent(READ_SUCCESS, { key, data: resultData });
+
+            resolve(resultData);
+        };
+    } else {
+        const keyParts = key.split(".");
+        const topLevelKey = keyParts.shift();
+        const readRequest = objectStore.get(topLevelKey);
+
+        readRequest.onsuccess = event => {
+            const resultData = event.target.result;
+
+            let keyData = resultData;
+            while (keyParts.length > 0) {
+                const currentKey = keyParts.shift();
+                if (typeof keyData === "undefined")
+                    break;
+
+                keyData = keyData[currentKey];
+            }
+
+            if (keyData) {
+                updateCache(key, keyData);
+            }
+            doEvent(READ_SUCCESS, { key, data: keyData });
+
+            resolve(keyData);
+        };
+    }
+}
+
 export function write(key, data) {
     return new Promise((resolve, reject) => {
-        if (!canUseIDB()) {
-            updateCache(key, data);
-            doEvent(PUT_SUCCESS, { key, data });
-            return resolve();
-        }
         openStorage().then(db => {
-            const transaction = db.transaction([STOXY_DATA_STORAGE], 'readwrite');
-            transaction.oncomplete = event => {
-                invalidateCache(key);
-                doEvent(PUT_SUCCESS, { key, data });
-                resolve(event);
-            };
-            transaction.onerror = event => {
-                reject(event);
-            };
-
-            const objectStore = transaction.objectStore(STOXY_DATA_STORAGE);
-            objectStore.put(data, key);
+            // If writing on top level
+            if (!key.includes('.')) {
+                writeToStore(key, data, db, resolve, reject);
+            } else {
+                // If we're only writing to a property of data
+                writeToKeyInStore(key, data, db, resolve, reject);
+            }
         });
     });
+}
+
+function writeToKeyInStore(key, data, db, resolve, reject) {
+    const keyParts = key.split('.');
+    const topLevelKey = keyParts.shift();
+    read(topLevelKey).then(keyData => {
+        const dataToWrite = keyData || {};
+        let elementReference = dataToWrite;
+        while (keyParts.length > 1) {
+            const currentKey = keyParts.shift();
+            if (typeof elementReference[currentKey] === 'undefined') {
+                elementReference[currentKey] = {};
+            }
+            elementReference = elementReference[currentKey];
+        }
+        const finalKey = keyParts.shift();
+        elementReference[finalKey] = data;
+
+        writeToStore(topLevelKey, dataToWrite, db, resolve, reject);
+    });
+}
+
+function writeToStore(key, data, db, resolve, reject) {
+    if (!canUseIDB()) {
+        updateCache(key, data);
+        return resolve();
+    }
+    const transaction = createWriteTransaction(key, data, db, resolve, reject);
+    const objectStore = transaction.objectStore(STOXY_DATA_STORAGE);
+    objectStore.put(data, key);
+}
+
+function createWriteTransaction(key, data, db, resolve, reject) {
+    const transaction = db.transaction([STOXY_DATA_STORAGE], 'readwrite');
+    transaction.oncomplete = event => {
+        invalidateCache(key);
+        doEvent(PUT_SUCCESS, { key, data });
+        resolve(event);
+    };
+    transaction.onerror = event => {
+        reject(event);
+    };
+    return transaction;
 }
 
 export function clear(key) {
@@ -174,6 +238,9 @@ export function add(key, data) {
 export function remove(key, predicate) {
     read(key).then(keyData => {
         if (!keyData) return;
-        write(key, keyData.filter(d => !predicate(d)));
+        write(
+            key,
+            keyData.filter(d => !predicate(d)),
+        );
     });
 }
