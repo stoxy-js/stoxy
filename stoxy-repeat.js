@@ -6,7 +6,7 @@ class StoxyRepeat extends Stoxy {
         super();
         this.fullKey = this.getAttribute('key');
         this.key = this.fullKey.split('.').shift();
-        this.content = this.innerHTML;
+        this.content = this.innerHTML.trim();
         this.contentNodeCount = document.createRange().createContextualFragment(this.content).length;
     }
 
@@ -27,7 +27,6 @@ class StoxyRepeat extends Stoxy {
         if (!this.hasAttribute("ready")) {
             this.innerHTML = "";
         }
-        const oldData = this.iterableData || [];
         this.iterableData = iterableData;
 
         const contentTemplate = this.content;
@@ -45,12 +44,13 @@ class StoxyRepeat extends Stoxy {
 
         const newContentContext = document.createRange().createContextualFragment(newContentHTML);
         const newContentNodes = [...newContentContext.childNodes];
-        const childNodes = [...this.childNodes];
+        const previousNodes = [...this.childNodes];
 
-        const currentNodesMapped = this.mapNodesByName(childNodes);
+        const currentNodesMapped = this.mapNodesByName(previousNodes);
         const newNodesMapped = this.mapNodesByName(newContentNodes);
+
         // Remove elements that are not present anymore
-        childNodes.forEach(childNode => {
+        previousNodes.forEach(childNode => {
             const nodesWithSameName = newNodesMapped[childNode.nodeName] || [];
             const isRemoved = !nodesWithSameName.some(n => childNode.outerHTML === n.outerHTML);
             if (isRemoved) {
@@ -58,6 +58,7 @@ class StoxyRepeat extends Stoxy {
             }
         });
 
+        // Add missing elements
         newContentNodes.forEach(newNode => {
             const nodesWithSameName = currentNodesMapped[newNode.nodeName] || [];
             const isPresent = nodesWithSameName.some(n => newNode.outerHTML === n.outerHTML);
@@ -66,14 +67,16 @@ class StoxyRepeat extends Stoxy {
             }
         });
 
-        for (let i = 0; i < this.iterableData.length; i++) {
-            /*if (this.iterableData[i] !== oldData[i]) {
-                console.log("Index changed", this.iterableData[i]);
-                const iterationNodesIndex = i + 1 * this.contentNodeCount;
-                
-            }*/
-            const itData = this.iterableData[i];
-        }
+        // See which elements are falsly ordered
+        const currentNodes = this.childNodes;
+        currentNodes.forEach((n, i) => {
+            if (n.outerHTML !== newContentNodes[i].outerHTML) {
+                const correspondingNode = newContentNodes.filter(cn => cn.outerHTML === n.outerHTML)[0]
+                const correctIndex = newContentNodes.indexOf(correspondingNode);
+                currentNodes[correctIndex].before(n);
+            }
+        });
+
 
         this._setReady(true);
     }

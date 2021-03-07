@@ -14,7 +14,7 @@ export default class TodoAdder extends LitElement {
     render() {
         return html`
       <form @submit=${this.handleSubmit}>
-        <input type="text" name="task" placeholder="Add todo..." />
+        <input type="text" name="task" placeholder="Add todo..." autocomplete="off" />
         <input type="submit" value="Submit" />
       </form>
     `;
