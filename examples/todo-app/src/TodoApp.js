@@ -19,7 +19,7 @@ export default class TodoApp extends LitElement {
     }
 
     todosChangeCallback(e) {
-        write('todocount', e && e.data ? e.data.length : 0);
+        //write('todocount', e && e.data ? e.data.length : 0);
     }
 
     static get styles() {

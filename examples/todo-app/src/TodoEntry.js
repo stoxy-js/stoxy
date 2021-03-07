@@ -10,7 +10,8 @@ export default class TodoEntry extends LitElement {
 
     async shiftTaskUp() {
         const todos = await read('todos');
-        const taskIndex = todos.indexOf(this.task);
+        const todoTask = todos.filter(t => t.task === this.task)[0];
+        const taskIndex = todos.indexOf(todoTask);
         if (taskIndex <= 0) return;
 
         const tmp = todos[taskIndex];
@@ -21,7 +22,8 @@ export default class TodoEntry extends LitElement {
 
     async shiftTaskDown() {
         const todos = await read('todos');
-        const taskIndex = todos.indexOf(this.task);
+        const todoTask = todos.filter(t => t.task === this.task)[0];
+        const taskIndex = todos.indexOf(todoTask);
         if (taskIndex >= todos.length - 1) return;
 
         const tmp = todos[taskIndex];
@@ -32,7 +34,7 @@ export default class TodoEntry extends LitElement {
 
     removeTask() {
         this.addEventListener("transitionend", () => {
-            remove('todos', task => task === this.task);
+            remove('todos', todo => todo.task === this.task);
         });
         this.setAttribute("leaving", "");
     }
