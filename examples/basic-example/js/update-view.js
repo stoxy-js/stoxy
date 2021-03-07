@@ -26,7 +26,7 @@ export default class UpdateView extends HTMLElement {
         });
 
         this.shadowRoot.querySelector('#del-button').addEventListener('click', () => {
-            del('user');
+            clear('user');
         });
 
         this._initInputs();

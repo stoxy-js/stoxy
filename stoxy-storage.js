@@ -140,7 +140,7 @@ export function write(key, data) {
     });
 }
 
-export function del(key) {
+export function clear(key) {
     return new Promise((resolve, reject) => {
         if (!canUseIDB()) {
             invalidateCache(key);
