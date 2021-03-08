@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Discover",
+    "children": [
+      {
+        "text": "Blog",
+        "href": "/blog/"
+      },
+      {
+        "text": "Help and Feedback",
+        "href": "https://github.com/Matsuuu/stoxy/issues"
+      }
+    ]
+  },
+  {
+    "name": "Follow",
+    "children": [
+      {
+        "text": "GitHub",
+        "href": "https://github.com/Matsuuu/stoxy"
+      },
+      {
+        "text": "Twitter",
+        "href": "https://twitter.com/matsuuu_"
+      }
+    ]
+  },
+  {
+    "name": "Support",
+    "children": [
+      {
+        "text": "Contribute",
+        "href": "https://github.com/Matsuuu/stoxy/issues"
+      }
+    ]
+  }
+]

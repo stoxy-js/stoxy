@@ -1,7 +1,7 @@
 ---
 title: Stoxy
 layout: layout-home
-slogan: The atomic state management system
+slogan: The atomic state management system equipped with Web Components
 callToActionItems:
   - text: Follow Guides
     href: /guides/

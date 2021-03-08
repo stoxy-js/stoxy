@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "rocket start"
+    "start": "rocket start",
+    "build": "rocket build"
   },
   "keywords": [],
   "author": "",
