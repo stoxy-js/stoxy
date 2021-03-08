@@ -26,7 +26,7 @@ automatically, without any input from the developer.
 
 The updates are ran in a dynamic fashion, and only the content that has updated will be changed.
 
-With elements like [Stoxy Repeat](../../../docs/components/stoxy-repeat), the iterable stateobject are 
+With elements like [Stoxy Repeat](https://stoxy.dev/docs/components/stoxy-repeat), the iterable stateobject are 
 compared to their old state, and sorted automatically to match the new order of the
 state array. Only the items in the wrong order are moved around the DOM, and the ones that didn't change order
 will be kept untouched.

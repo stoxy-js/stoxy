@@ -3,10 +3,6 @@
     "name": "Discover",
     "children": [
       {
-        "text": "Blog",
-        "href": "/blog/"
-      },
-      {
         "text": "Help and Feedback",
         "href": "https://github.com/Matsuuu/stoxy/issues"
       }
