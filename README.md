@@ -6,9 +6,13 @@
 
 # 🗂️ Stoxy
 
-Stoxy is a state management API equipped with Web Components for ease of use.
+Stoxy is a state management API equipped with Web Components.
 
 Stoxy allows you to easily handle, persist and update data in your DOM without the weight of a framework.
+
+# 📖 Official docs
+
+Official docs can be found [here](https://stoxy.dev)
 
 ## ❓ How
 
@@ -76,139 +80,136 @@ Stoxy will not update any element which's data didn't change, enhancing the perf
 
 **_ Only the DOM elements which had their data changed will be updated _**
 
-![Stoxy Demo](assets/stoxy-demo.gif)
-
 ## 🧰 Installation
 
+To install the full stoxy suite, run
+
 ```sh
-npm install stoxy
+npm install @stoxy/stoxy
+```
+
+You can also install packages from the stoxy suite as standalone modules.
+
+```sh
+npm install @stoxy/core @stoxy/string @stoxy/repeat @stoxy/form @stoxy/object
 ```
 
 ## Usage
 
-#### Data Storage
+#### Write
 
-##### Write
+```js
+import { write } from '@stoxy/core';
 
-```javascript
-import { write } from 'stoxy';
+write("counter", 0);
 
-const userData = {
-    name: 'Matsuuu',
-    favoriteLanguage: 'Javascript',
-    knownLanguages: ['Java', 'Javascript', 'C#'],
-};
-
-write('user', userData);
 ```
 
-##### Read
+---
 
-```javascript
-import { read } from 'stoxy';
+```js
+import { write } from '@stoxy/core';
 
-const userData = await read('user');
-console.log(userData);
-/*
- *  {
- *    name: 'Matsuuu',
- *    favoriteLanguage: 'Javascript',
- *    knownLanguages: ['Java', 'Javascript', 'C#'],
- *  }
- */
+
+write("Shoppingcart", [{id: 123, name: "Free gift"}]);
 ```
 
-### Usage in DOM
+#### Read
 
-Stoxy ships with 3 Web Components to ease the usage:
+```js
+import { read } from '@stoxy/core';
 
-#### Stoxy Object
-
-Stoxy object is the most common use case: you want to access multiple keys of a certain object within your DOM.
-
-```html
-<stoxy-object key="user-data" prefix="u.">
-    <h1>Hello, World!</h1>
-
-    <p>My name is: u.name, and I'm from u.country.countryName (u.country.countryCode).</p>
-    <p>My favorite animal is: u.favoriteAnimal</p>
-
-    <p>My favorite programming languages are:</p>
-    <stoxy-repeat key="stoxy-user-demo.favoriteProgrammingLanguages" id="progLang">
-        <li>progLang</li>
-    </stoxy-repeat>
-</stoxy-object>
+read('shoppingcart').then(shoppingCartItems => {
+    shoppingCartItems.map(item => console.log(item));
+});
 ```
 
-Which then renders as
+---
 
-```html
-<stoxy-object key="stoxy-user-demo" prefix="u." ready="">
-    <h1>Hello, World!</h1>
+```js
+import { read } from '@stoxy/core';
 
-    <p>My name is: Matsu, and I'm from Finland (FI).</p>
-    <p>My favorite animal is: Cats</p>
-
-    <p>My favorite programming languages are:</p>
-    <stoxy-repeat key="stoxy-user-demo.favoriteProgrammingLanguages" id="progLang">
-        <li>Javascript</li>
-
-        <li>Java</li>
-
-        <li>C++</li>
-    </stoxy-repeat>
-</stoxy-object>
+async function getItems() {
+    const items = await read('shoppingcart');
+    return items;
+}
 ```
 
-Stoxy Object can access data in as low levels as needed. As seen in the example, you can access subobjects like `user.country.countryCode`
+#### Sub
 
-Stoxy elements can also be nested without any stress.
+```js
+import { sub } from '@stoxy/core';
 
-#### Stoxy Repeat
+sub("shoppingcart", updateItemCount);
 
-A lot of the time when you have content, you end up having lists of data you want to display.
-
-In these cases you can use the Stoxy Repeat Web Component
-
-```html
-<p>My favorite games:</p>
-<stoxy-repeat key="user.favoriteGames" id="game">
-    <div class="game-entry">
-        <p>Name: game.name</p>
-        <p>Genre: game.genre</p>
-        <p>Rating: game.rating</p>
-    </div>
-</stoxy-repeat>
+function updateItemCount(e) {
+    write("itemcount", e.data.length);
+}
 ```
 
-Which will then result in the following HTML
+#### Clear
 
-```html
-<p>My favorite games:</p>
-<stoxy-repeat key="user.favoriteGames" id="game">
-    <div class="game-entry">
-        <p>Name: StarCraft 2</p>
-        <p>Genre: RTS</p>
-        <p>Rating: 4.7/5</p>
-    </div>
-    <div class="game-entry">
-        <p>Name: World of Warcraft</p>
-        <p>Genre: MMORPG</p>
-        <p>Rating: 4.0/5</p>
-    </div>
-</stoxy-repeat>
+```js
+import { clear } from '@stoxy/core';
+
+clear('shoppingcart');
 ```
 
-#### Stoxy String
+#### Update
 
-The final Web Component is for when you just want to use a single string from your object
+```js
+import { write, update } from '@stoxy/core';
 
-```html
-<h2>Hello, <stoxy-string>user.name</stoxy-string>!</h2>
+write("counter", 0);
+
+// Update counter every second
+setInterval(() => {
+    update("counter", counter => counter += 1);
+}, 1000);
+
 ```
 
-## Future plans
+#### Remove
 
--   Pub-Sub system for programmatic reactions
+```js
+import { remove } from '@stoxy/core';
 
-Have something you want Stoxy to support? [Create an issue!](https://github.com/Matsuuu/stoxy/issues/new)
+// Removes product with the id 1
+remove("shoppingcart", product => product.id === 1);
+```
+
+---
+
+```js
+import { remove } from '@stoxy/core';
+
+// Remove all products with a price over 5
+remove("shoppingcart", product => product.price > 5);
+```
+
+---
+
+```js
+import { remove } from '@stoxy/core';
+
+// Remove all meat
+remove("shoppingcart", removeMeat);
+
+function removeMeat(product) {
+    if (product.type === "Meat" || product.type === "Chicken") {
+        return true;
+    }
+    return false;
+}
+```
+
+#### Persist key
+
+```js
+import { persistKey } from '@stoxy/core';
+
+persistKey('shoppingcart');
+
+// with multiple keys
+persistKey('shoppingcart', 'history', 'address');
+```
