@@ -1,8 +1,8 @@
 {
-  "name": "stoxy",
-  "version": "1.2.0",
+  "name": "@stoxy/stoxy",
+  "version": "0.1.2",
   "description": "Stoxy is a state management tool used for easy access to frequently used data without the hassle of template strings.",
-  "main": "stoxy.js",
+  "main": "index.js",
   "scripts": {
     "start": "wds --node-resolve --watch --open",
     "example:basic": "cd examples/basic-example && npm start",
@@ -16,5 +16,12 @@
     "@simplr-wc/prettier-config": "^1.0.1",
     "@web/dev-server": "0.0.15"
   },
-  "prettier": "@simplr-wc/prettier-config"
+  "prettier": "@simplr-wc/prettier-config",
+  "dependencies": {
+    "@stoxy/core": "^0.1.0",
+    "@stoxy/form": "^0.1.2",
+    "@stoxy/object": "^0.1.2",
+    "@stoxy/repeat": "^0.1.2",
+    "@stoxy/string": "^0.1.2"
+  }
 }
