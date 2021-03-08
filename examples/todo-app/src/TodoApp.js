@@ -1,9 +1,9 @@
 import { LitElement, html, css } from 'lit-element';
 import './TodoAdder';
 import './TodoEntry';
-import 'stoxy/stoxy-repeat';
-import 'stoxy/stoxy-string';
-import { clear, sub, write, persistKey, update } from 'stoxy';
+import '@stoxy/repeat';
+import '@stoxy/string';
+import { clear, sub, write, persistKey, update } from '@stoxy/core';
 
 export default class TodoApp extends LitElement {
     static get properties() {

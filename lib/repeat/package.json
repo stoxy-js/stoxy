@@ -1,0 +1,16 @@
+{
+  "name": "@stoxy/repeat",
+  "version": "0.1.2",
+  "description": "Stoxy is a state management tool used for easy access to frequently used data without the hassle of template strings.",
+  "main": "stoxy-repeat.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Matsuuu/stoxy"
+  },
+  "author": "Matsuuu <huhta.matias@gmail.com> (https://matsu.fi/)",
+  "license": "ISC",
+  "dependencies": {
+    "@stoxy/core": "^0.1.0"
+  }
+}
