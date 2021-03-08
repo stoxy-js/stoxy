@@ -118,4 +118,4 @@ export default class Stoxy extends HTMLElement {
     window.STOXY_INITIALIZED = true;
 })();
 
-export { openStorage, read, write, clear, sub, add, remove, persistKey } from './stoxy-storage.js';
+export { openStorage, read, write, clear, sub, add, remove, persistKey, update } from './stoxy-storage.js';

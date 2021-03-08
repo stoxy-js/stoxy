@@ -102,7 +102,7 @@ function invalidateCache(key) {
 export function read(key) {
     const readPromise = new Promise((resolve, reject) => {
         const cachedObject = fetchFromCache(key);
-        if (cachedObject || !canUseIDB()) {
+        if ((cachedObject != null && typeof cachedObject !== "undefined") || !canUseIDB()) {
             // To prevent direct array reference. Needed for stoxy repeat to work when e.g. sorting
             if (Array.isArray(cachedObject)) {
                 return resolve([...cachedObject]);
@@ -240,6 +240,12 @@ export function clear(key) {
             const objectStore = transaction.objectStore(STOXY_DATA_STORAGE);
             objectStore.delete(key);
         });
+    });
+}
+
+export function update(key, predicate) {
+    read(key).then(keyData => {
+        write(key, predicate(keyData));
     });
 }
 

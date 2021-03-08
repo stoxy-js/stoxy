@@ -3,7 +3,7 @@ import './TodoAdder';
 import './TodoEntry';
 import 'stoxy/stoxy-repeat';
 import 'stoxy/stoxy-string';
-import { clear, sub, write, persistKey } from 'stoxy';
+import { clear, sub, write, persistKey, update } from 'stoxy';
 
 export default class TodoApp extends LitElement {
     static get properties() {
@@ -16,10 +16,14 @@ export default class TodoApp extends LitElement {
 
     constructor() {
         super();
-        persistKey("todos", "todocount");
+        persistKey('todos', 'todocount');
     }
 
     firstUpdated() {
+        write('counter', 0);
+        setInterval(() => {
+            update('counter', counter => (counter += 1));
+        }, 1000);
         sub('todos', this.todosChangeCallback.bind(this));
     }
 
@@ -50,6 +54,7 @@ export default class TodoApp extends LitElement {
 
     render() {
         return html`
+      <stoxy-string default="0">counter</stoxy-string>
       <h1>My Todo app</h1>
       <button @click=${() => clear('todos')}>Clear list</button>
       <todo-adder></todo-adder>
