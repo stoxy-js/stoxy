@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit-element';
-import 'stoxy/stoxy-form';
+import '@stoxy/form';
 
 export default class TodoAdder extends LitElement {
     render() {

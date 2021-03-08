@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit-element';
-import { read, write, remove } from 'stoxy';
+import { read, write, remove } from '@stoxy/core';
 
 export default class TodoEntry extends LitElement {
     static get properties() {
