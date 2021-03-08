@@ -1,9 +1,9 @@
 html {
   --primary-color: #232629;
-  --primary-color-lighter: #e25761;
-  --primary-color-darker: #a22831;
-  --primary-color-accent: #cee5f6;
-  --primary-text-color: #2c3e50;
+  --primary-color-lighter: #474d53;
+  --primary-color-darker: #353a3e;
+  --primary-color-accent: #596168;
+  --primary-text-color: #232629;
   --primary-lines-color: #ccc;
 
   /* Contrast colors */
@@ -12,9 +12,10 @@ html {
 
   /* background-colors */
   --page-background: white;
-  --footer-background: rgba(0, 0, 0, 0.1);
+  --footer-background: #232629;
+  --footer-text-color: #FFF;
 
-  --text-color: black;
+  --text-color: #232629;
 }
 
 html.dark {
