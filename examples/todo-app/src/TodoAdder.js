@@ -7,7 +7,6 @@ export default class TodoAdder extends LitElement {
       <stoxy-form
         key="todos"
         action="add"
-        url="http://localhost:3000"
         @submit=${() => {
                 this.shadowRoot.querySelector('input').value = '';
             }}

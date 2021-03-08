@@ -40,7 +40,6 @@ export default class TodoEntry extends LitElement {
     }
 
     disconnectedCallback() {
-        console.log("Disconnected ", this);
     }
 
     render() {

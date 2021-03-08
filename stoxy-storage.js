@@ -4,11 +4,20 @@ const STOXY_VERSION_NUMBER = 1;
 const STOXY_DATA_STORAGE = 'StoxyStorage';
 const STOXY_CACHE_SIZE = 5;
 
+let persistKeys = [];
 const cacheKeys = [];
 const cache = {};
 
 function canUseIDB() {
     return Boolean(window.indexedDB);
+}
+
+export function persistKey(...keyOrKeys) {
+    persistKeys = [...persistKeys, ...keyOrKeys];
+}
+
+function shouldPersist(key) {
+    return persistKeys.includes(key);
 }
 
 function doEvent(name, data) {
@@ -66,9 +75,16 @@ function updateCache(key, data) {
         cacheKeys.push(key);
     }
     cache[key] = data;
+    // If we have persisted keys in cache, we remove one of them to make room
     if (canUseIDB() && cacheKeys.length > STOXY_CACHE_SIZE) {
-        const keyToRemove = cacheKeys.shift();
-        delete cache[keyToRemove];
+        for (let i = cacheKeys.length; i >= 0; i--) {
+            const cacheKey = cacheKeys[i];
+            if (persistKeys.includes(cacheKey)) {
+                persistKeys.splice(i, 1);
+                delete cache[cacheKey];
+                break;
+            }
+        }
     }
 }
 
@@ -117,7 +133,6 @@ function readFromStore(key, db, resolve, reject) {
                 updateCache(key, resultData);
             }
             doEvent(READ_SUCCESS, { key, data: resultData });
-
             resolve(resultData);
         };
     } else {
@@ -141,7 +156,6 @@ function readFromStore(key, db, resolve, reject) {
                 updateCache(key, keyData);
             }
             doEvent(READ_SUCCESS, { key, data: keyData });
-
             resolve(keyData);
         };
     }
@@ -182,8 +196,9 @@ function writeToKeyInStore(key, data, db, resolve, reject) {
 }
 
 function writeToStore(key, data, db, resolve, reject) {
-    if (!canUseIDB()) {
+    if (!canUseIDB() || !shouldPersist(key)) {
         updateCache(key, data);
+        doEvent(PUT_SUCCESS, { key, data });
         return resolve();
     }
     const transaction = createWriteTransaction(key, data, db, resolve, reject);
