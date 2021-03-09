@@ -217,7 +217,32 @@
 	<main class="markdown-body">
   
     <h1 id="docs"><a class="anchor" href="#docs"><svg class="octicon octicon-link" viewBox="0 0 16 16" aria-hidden="true" width="16" height="16"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Docs</h1>
-<p>In the docs section you can find documentation of utilizing Stoxy and Stoxy Elements</p>
+<h2 id="motivation"><a class="anchor" href="#motivation"><svg class="octicon octicon-link" viewBox="0 0 16 16" aria-hidden="true" width="16" height="16"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Motivation</h2>
+<p>The motivation behind Stoxy as to provide a simpler solution for cross-app state management.</p>
+<p>With Stoxy you are up and running after writing just one line of code. After setting your first state object,
+you have a functional state system ready to be used.</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword module">import</span> <span class="token punctuation">{</span> write <span class="token punctuation">}</span> <span class="token keyword module">from</span> <span class="token string">"@stoxy/core"</span><span class="token punctuation">;</span>
+
+<span class="token function">write</span><span class="token punctuation">(</span><span class="token string">"users"</span><span class="token punctuation">,</span> userList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="simplicity"><a class="anchor" href="#simplicity"><svg class="octicon octicon-link" viewBox="0 0 16 16" aria-hidden="true" width="16" height="16"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Simplicity</h3>
+<p>All of Stoxy's commands are 1-2 parameters long, and can be executed as "one-liners".</p>
+<p>They are however extremely extendable due to the nature of the state management system of Stoxy. Some of the Stoxy core
+functions like <code>update</code> and <code>remove</code>  even take delegates or predicates as a parameter to give the developer
+more control over their state management.</p>
+<h3 id="ecosystem"><a class="anchor" href="#ecosystem"><svg class="octicon octicon-link" viewBox="0 0 16 16" aria-hidden="true" width="16" height="16"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Ecosystem</h3>
+<p>Stoxy ships with a small set of Web Components, which are framework agnostic components ready for use in any project.</p>
+<p>The components are built to as reactive pieces of an application, updating their contents accordin to state
+change without the developer having to do any work.</p>
+<h3 id="persistence"><a class="anchor" href="#persistence"><svg class="octicon octicon-link" viewBox="0 0 16 16" aria-hidden="true" width="16" height="16"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Persistence</h3>
+<p>Stoxy comes shipped with persistence out of the box. There are many cases in which it is beneficial to persist the state
+data through page reloads and navigation. Wether it be stale-while-revalidate patterns, or just static information fetched
+from the API.</p>
+<p>The Persistence in Stoxy is opt-in, meaning that you control exactly what information gets persisted.</p>
+<h3 id="use-them-how-you-want-to"><a class="anchor" href="#use-them-how-you-want-to"><svg class="octicon octicon-link" viewBox="0 0 16 16" aria-hidden="true" width="16" height="16"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Use them how you want to</h3>
+<p>The whole core set of Stoxy is built from smaller modules, which can be attached at will.</p>
+<p>This means that you can use Stoxy only for managing state, and then handle all the events through subscribers,
+or you can go all in on Stoxy and deploy a whole application built with stoxy elements using barely any Javascript</p>
 
   
     <button id="layout-index-open-navigation" class="call-to-action" data-action="trigger-mobile-menu">
