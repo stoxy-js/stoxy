@@ -1,8 +1,8 @@
 ![Stoxy Logo](assets/stoxy.png)
 
-![](https://badgen.net/npm/v/stoxy)
-![](https://badgen.net/bundlephobia/dependency-count/stoxy)
-![](https://badgen.net/bundlephobia/minzip/stoxy)
+![](https://badgen.net/npm/v/@stoxy/stoxy)
+![](https://badgen.net/bundlephobia/dependency-count/@stoxy/core)
+![](https://badgen.net/bundlephobia/minzip/@stoxy/core)
 
 # 🗂️ Stoxy
 
