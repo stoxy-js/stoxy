@@ -8,6 +8,16 @@ This can be useful for example when generating user profile pages.
 As with all of Stoxy elements, Stoxy Object also updates it's contents automatically
 as the state changes. No action needed from the developer side.
 
+```js script
+import '@rocket/launch/inline-notification/inline-notification.js';
+```
+<inline-notification type="tip" title="Reactivity">
+
+As with all of Stoxy elements, Stoxy Object also updates it's contents automatically
+as the state changes. No action needed from the developer side.
+
+</inline-notification>
+
 ### Attributes
 
 | Name   | Attribute                                                                                                           |

@@ -25,8 +25,8 @@
 
 
 
-<meta name="description" content="The atomic state management system equipped with Web Components"/>
-<meta property="og:description" content="The atomic state management system equipped with Web Components"/>
+<meta name="description" content="The reactive state management system equipped with Web Components"/>
+<meta property="og:description" content="The reactive state management system equipped with Web Components"/>
 
   
     <link rel="apple-touch-icon" sizes="180x180" href="/_merged_assets/_static/icons/apple-touch-icon.png">
@@ -41,7 +41,7 @@
     <meta property="og:site_name" content="Stoxy"/>
 <meta property="og:type" content="website"/>
 
-<meta property="og:image" content=""/>
+<meta property="og:image" content="/_merged_assets/11ty-img/1d181a11-1200.png"/>
 <meta property="og:url" content="/docs/methods/sub/"/>
 
 <meta name="twitter:card" content="summary_large_image"/>
@@ -243,15 +243,60 @@
 <h3 id="usage"><a class="anchor" href="#usage"><svg class="octicon octicon-link" viewBox="0 0 16 16" aria-hidden="true" width="16" height="16"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Usage</h3>
 <pre class="language-js"><code class="language-js"><span class="token keyword module">import</span> <span class="token punctuation">{</span> sub <span class="token punctuation">}</span> <span class="token keyword module">from</span> <span class="token string">'@stoxy/core'</span><span class="token punctuation">;</span>
 
-<span class="token function">sub</span><span class="token punctuation">(</span><span class="token string">"shoppingcart"</span><span class="token punctuation">,</span> <span class="token parameter">e</span> <span class="token arrow operator">=></span> <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">"Shopping card updated. Current contents: "</span><span class="token punctuation">,</span> e<span class="token punctuation">.</span><span class="token property-access">data</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">sub</span><span class="token punctuation">(</span><span class="token string">'shoppingcart'</span><span class="token punctuation">,</span> <span class="token parameter">e</span> <span class="token arrow operator">=></span> <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">'Shopping card updated. Current contents: '</span><span class="token punctuation">,</span> e<span class="token punctuation">.</span><span class="token property-access">data</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <hr>
 <pre class="language-js"><code class="language-js"><span class="token keyword module">import</span> <span class="token punctuation">{</span> sub <span class="token punctuation">}</span> <span class="token keyword module">from</span> <span class="token string">'@stoxy/core'</span><span class="token punctuation">;</span>
 
-<span class="token function">sub</span><span class="token punctuation">(</span><span class="token string">"shoppingcart"</span><span class="token punctuation">,</span> updateItemCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">sub</span><span class="token punctuation">(</span><span class="token string">'shoppingcart'</span><span class="token punctuation">,</span> updateItemCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">function</span> <span class="token function">updateItemCount</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">write</span><span class="token punctuation">(</span><span class="token string">"itemcount"</span><span class="token punctuation">,</span> e<span class="token punctuation">.</span><span class="token property-access">data</span><span class="token punctuation">.</span><span class="token property-access">length</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">write</span><span class="token punctuation">(</span><span class="token string">'itemcount'</span><span class="token punctuation">,</span> e<span class="token punctuation">.</span><span class="token property-access">data</span><span class="token punctuation">.</span><span class="token property-access">length</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="callback-payload"><a class="anchor" href="#callback-payload"><svg class="octicon octicon-link" viewBox="0 0 16 16" aria-hidden="true" width="16" height="16"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Callback payload</h3>
+<p>The callback function is passed information about the event as a parameter, which can then be
+used to easily react to the change.</p>
+<h3 id="callback-params"><a class="anchor" href="#callback-params"><svg class="octicon octicon-link" viewBox="0 0 16 16" aria-hidden="true" width="16" height="16"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Callback params</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Attribute</th></tr></thead><tbody><tr><td>key</td><td>Key in string form. Used as the name of the state object</td></tr><tr><td>action</td><td>Action type or the update event (Update on content update, Delete on successful clear of said key)</td></tr><tr><td>data</td><td>Current data in said state</td></tr></tbody></table>
+<h3 id="usage-1"><a class="anchor" href="#usage-1"><svg class="octicon octicon-link" viewBox="0 0 16 16" aria-hidden="true" width="16" height="16"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Usage</h3>
+<p>This can be used to easily react to the events happening with the state</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword module">import</span> <span class="token punctuation">{</span> sub <span class="token punctuation">}</span> <span class="token keyword module">from</span> <span class="token string">'@stoxy/core'</span><span class="token punctuation">;</span>
+
+<span class="token function">sub</span><span class="token punctuation">(</span><span class="token string">'shoppingcart'</span><span class="token punctuation">,</span> onShoppingcartUpdate<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">onShoppingcartUpdate</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>e<span class="token punctuation">.</span><span class="token property-access">action</span> <span class="token operator">===</span> <span class="token string">'Update'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">'Shoppingcart updated'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">'Shoppingcart cleared'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">fetch</span><span class="token punctuation">(</span>myShoppingCardContentApiUrl<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+        method<span class="token punctuation">:</span> <span class="token string">'POST'</span><span class="token punctuation">,</span>
+        body<span class="token punctuation">:</span> <span class="token known-class-name class-name">JSON</span><span class="token punctuation">.</span><span class="token method function property-access">stringify</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span><span class="token property-access">data</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
 
