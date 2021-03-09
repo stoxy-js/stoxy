@@ -187,5 +187,11 @@
       <changefreq>monthly</changefreq>
     </url>
   
+    <url>
+      <loc>/guides/examples/user-list/</loc>
+      <lastmod>2021-03-09T06:57:38.187Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
 </urlset>
 
