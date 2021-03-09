@@ -176,12 +176,6 @@
     </url>
   
     <url>
-      <loc>https://stoxy.dev//</loc>
-      <lastmod>2021-03-08T15:58:34.795Z</lastmod>
-      <changefreq>monthly</changefreq>
-    </url>
-  
-    <url>
       <loc>https://stoxy.dev//404.html</loc>
       <lastmod>2021-03-08T16:00:05.898Z</lastmod>
       <changefreq>monthly</changefreq>
@@ -190,6 +184,12 @@
     <url>
       <loc>https://stoxy.dev//guides/examples/user-list/</loc>
       <lastmod>2021-03-09T06:57:38.187Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//</loc>
+      <lastmod>2021-03-09T10:16:09.330Z</lastmod>
       <changefreq>monthly</changefreq>
     </url>
   
