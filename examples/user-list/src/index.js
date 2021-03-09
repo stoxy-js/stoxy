@@ -56,7 +56,8 @@ setTimeout(() => {
     addListeners();
 }, 100);
 
-function addListeners() {
+function addListeners(e) {
+    console.log(e);
     document.querySelectorAll("button").forEach((but) => {
         if (!but.hasAttribute("listening-for-delete")) {
             but.addEventListener("click", removeUser);
@@ -70,8 +71,11 @@ function removeUser(e) {
     const userId = Number(parent.id);
 
     parent.setAttribute("leaving", "");
-    parent.addEventListener("transitionend", () => {
-        remove("users", (user) => user.id === userId);
+    parent.addEventListener("transitionend", (e) => {
+        // Remove user after faded out
+        if (e.propertyName === "opacity") {
+            remove("users", (user) => user.id === userId);
+        }
     });
 }
 
