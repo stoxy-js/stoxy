@@ -1,9 +1,9 @@
-import { LitElement, html, css } from 'lit-element';
+import { LitElement, html, css } from "lit-element";
 import './TodoAdder';
 import './TodoEntry';
 import '@stoxy/repeat';
 import '@stoxy/string';
-import { add, clear, sub, write, persistKey, update, read } from '@stoxy/core';
+import { persistKey, sub, write, add, update, clear } from "@stoxy/core";
 
 export default class TodoApp extends LitElement {
     static get properties() {
@@ -21,6 +21,9 @@ export default class TodoApp extends LitElement {
 
     firstUpdated() {
         write('counter', 0);
+        write("test", []).then(() => {
+            add("test", "foo").then(res => console.log(res));
+        });
         setInterval(() => {
             update('counter', counter => (counter += 1));
         }, 1000);

@@ -238,6 +238,28 @@ some point before writing into the state.</p>
 <span class="token function">write</span><span class="token punctuation">(</span><span class="token string">"userData"</span><span class="token punctuation">,</span> userData<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 </code></pre>
+<h4 id="specific-write"><a class="anchor" href="#specific-write"><svg class="octicon octicon-link" viewBox="0 0 16 16" aria-hidden="true" width="16" height="16"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Specific write</h4>
+<p>You can also write a property of a state object just as easily as you would the whole state object</p>
+<p>This is exteremely handy when you don't need to update the whole state object at the same time.</p>
+<p>With a state object like</p>
+<pre class="language-json"><code class="language-json">const userData = <span class="token punctuation">{</span>
+    userName<span class="token operator">:</span> <span class="token string">"Stoxy"</span><span class="token punctuation">,</span>
+    shoppingCart<span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span> id<span class="token operator">:</span> <span class="token number">123</span><span class="token punctuation">,</span> name<span class="token operator">:</span> <span class="token string">"Flaming hot cheetos"</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    shoppingHistory<span class="token operator">:</span> <span class="token punctuation">{</span>
+        latestProducts<span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span> id<span class="token operator">:</span> <span class="token number">555</span><span class="token punctuation">,</span> name<span class="token operator">:</span> <span class="token string">"Doritos"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span> id<span class="token operator">:</span> <span class="token number">958</span><span class="token punctuation">,</span> name<span class="token operator">:</span> <span class="token string">"Pringles"</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>;
+</code></pre>
+<p>One could rewrite the userName with</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword module">import</span> <span class="token punctuation">{</span> write <span class="token punctuation">}</span> <span class="token keyword module">from</span> <span class="token string">'@stoxy/core'</span><span class="token punctuation">;</span>
+
+<span class="token function">write</span><span class="token punctuation">(</span><span class="token string">"userData.userName"</span><span class="token punctuation">,</span> <span class="token string">"Foobar"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 
   
     <div class="content-footer">

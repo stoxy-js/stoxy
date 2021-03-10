@@ -1,6 +1,6 @@
 {
   "name": "@stoxy/object",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Stoxy is a state management tool used for easy access to frequently used data without the hassle of template strings.",
   "main": "stoxy-object.js",
   "scripts": {},
@@ -11,6 +11,6 @@
   "author": "Matsuuu <huhta.matias@gmail.com> (https://matsu.fi/)",
   "license": "ISC",
   "dependencies": {
-    "@stoxy/core": "^0.2.2"
+    "@stoxy/core": "^0.2.3"
   }
 }

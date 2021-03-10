@@ -69,7 +69,7 @@ update('userData', userData => {
 
 The latter way is more versatile in that you could run a larger update in the same delegate
 
-```
+```js copy
 update("userData", userData => {
     userData.customerPoints += 100;
     userData.userName = "foobar";

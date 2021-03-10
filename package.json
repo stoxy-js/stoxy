@@ -1,6 +1,6 @@
 {
   "name": "@stoxy/stoxy",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "description": "The reactive state management system equipped with Web Components.",
   "main": "index.js",
   "scripts": {
@@ -16,10 +16,10 @@
   },
   "prettier": "@simplr-wc/prettier-config",
   "dependencies": {
-    "@stoxy/core": "^0.2.1",
-    "@stoxy/form": "^0.2.1",
-    "@stoxy/object": "^0.2.1",
-    "@stoxy/repeat": "^0.2.1",
-    "@stoxy/string": "^0.2.1"
+    "@stoxy/core": "^0.2.3",
+    "@stoxy/form": "^0.2.3",
+    "@stoxy/object": "^0.2.3",
+    "@stoxy/repeat": "^0.2.3",
+    "@stoxy/string": "^0.2.3"
   }
 }
