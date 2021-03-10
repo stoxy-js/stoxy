@@ -50,3 +50,42 @@ Adds
 ```
 
 to the state at key "todos".
+
+#### Sending the form data to a API on submit
+
+In some cases we might want to send the data from the form to a backend API while we save it to our state at the
+same time. This can be done by utilizing the stoxy-form's `url` attribute.
+
+
+```js copy
+import '@stoxy/form';
+```
+
+```html copy
+<stoxy-form
+    key="todos"
+    action="add"
+    url="https://my-website.app/todoadd"
+    method="POST"
+    requireok
+    @submit=${() => {
+         this.shadowRoot.querySelector('input').value = '';
+    }}
+>
+    <input
+        type="text"
+        name="task"
+        placeholder="Add todo..."
+        autocomplete="off"
+    />
+    <input type="submit" value="Submit" />
+</stoxy-form>
+
+```
+
+In the above case, a POST request would be made to `https://my-website.app/todoadd`, with the body 
+`{ task: "Your input" }`.
+
+The `requireok` attribute means that unless we get a OK response from the backend, we won't save the 
+data to state either.
+

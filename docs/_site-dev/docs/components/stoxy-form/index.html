@@ -41,7 +41,7 @@
     <meta property="og:site_name" content="Stoxy"/>
 <meta property="og:type" content="website"/>
 
-<meta property="og:image" content="/_merged_assets/11ty-img/ebf4dc82-1200.png"/>
+<meta property="og:image" content=""/>
 <meta property="og:url" content="/docs/components/stoxy-form/"/>
 
 <meta name="twitter:card" content="summary_large_image"/>
@@ -278,6 +278,35 @@ having to write any javascript.</p>
 <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span> task<span class="token punctuation">:</span> <span class="token string">"Your input"</span> <span class="token punctuation">}</span>
 </code></pre>
 <p>to the state at key "todos".</p>
+<h4 id="sending-the-form-data-to-a-api-on-submit"><a class="anchor" href="#sending-the-form-data-to-a-api-on-submit"><svg class="octicon octicon-link" viewBox="0 0 16 16" aria-hidden="true" width="16" height="16"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Sending the form data to a API on submit</h4>
+<p>In some cases we might want to send the data from the form to a backend API while we save it to our state at the
+same time. This can be done by utilizing the stoxy-form's <code>url</code> attribute.</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword module">import</span> <span class="token string">'@stoxy/form'</span><span class="token punctuation">;</span>
+</code></pre>
+<pre class="language-html"><code class="language-html">&#x3C;stoxy-form
+    key="todos"
+    action="add"
+    url="https://my-website.app/todoadd"
+    method="POST"
+    requireok
+    @submit=${() => {
+         this.shadowRoot.querySelector('input').value = '';
+    }}
+>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>input</span>
+        <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span>
+        <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>task<span class="token punctuation">"</span></span>
+        <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Add todo...<span class="token punctuation">"</span></span>
+        <span class="token attr-name">autocomplete</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>off<span class="token punctuation">"</span></span>
+    <span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Submit<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>stoxy-form</span><span class="token punctuation">></span></span>
+
+</code></pre>
+<p>In the above case, a POST request would be made to <code>https://my-website.app/todoadd</code>, with the body
+<code>{ task: "Your input" }</code>.</p>
+<p>The <code>requireok</code> attribute means that unless we get a OK response from the backend, we won't save the
+data to state either.</p>
 
   
     <div class="content-footer">
