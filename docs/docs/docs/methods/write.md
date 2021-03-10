@@ -11,6 +11,11 @@ Writes onto the state object given a key and a value
 | key   | Key in string form. Used as the name of the state object |
 | value | State object value                                       |
 
+
+### Returns
+
+A promise which resolves to the write result of the object: `{key: string, value: any}`
+
 ### Usage
 
 ```js copy

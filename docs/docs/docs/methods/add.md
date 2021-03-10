@@ -13,6 +13,10 @@ Returns a promise.
 | key   | Key in string form. Used as the name of the state object |
 | value | Any possible storable value                              |
 
+### Returns
+
+A promise which resolves to the write result of the object: `{key: string, value: any}`
+
 ### Usage
 
 ```js copy

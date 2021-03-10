@@ -14,6 +14,10 @@ Stoxy utilized IndexedDB to persist state objects. There could be two reasons yo
 | keyOrKeys | One or more keys as string, separated by a comma |
 
 
+### Returns
+
+void
+
 ### Usage 
 
 ```js copy

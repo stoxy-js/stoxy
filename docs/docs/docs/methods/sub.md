@@ -11,6 +11,11 @@ Allows you to programmatically react to state changes in wanted state objects
 | key      | Key in string form. Used as the name of the state object     |
 | callback | Callback Function to call when state of given key is updated |
 
+
+### Returns
+
+void
+
 ### Usage
 
 ```js copy

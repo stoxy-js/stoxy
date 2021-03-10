@@ -11,19 +11,22 @@ Useful for situtations, where you want to quickly update the state without havin
 | key      | Key in string form. Used as the name of the state object |
 | delegate | Delegate function to update the state by                 |
 
+### Returns
+
+A promise which resolves to the write result of the object: `{key: string, value: any}`
+
 ### Usage
 
 ```js copy
 import { write, update } from '@stoxy/core';
 
-write("counter", 0);
+write('counter', 0);
 
 // Update counter every second
 setInterval(() => {
-    update("counter", counter => counter += 1);
+    update('counter', counter => (counter += 1));
 }, 1000);
 ```
-
 
 #### Specific update
 
@@ -51,15 +54,14 @@ const userData = {
 
 One could update the customerPoints with one of the following ways
 
-
 ```js copy
 import { update } from '@stoxy/core';
 
-update("userData.customerPoints", points => points += 100);
+update('userData.customerPoints', points => (points += 100));
 
 // Or
 
-update("userData", userData => {
+update('userData', userData => {
     userData.customerPoints += 100;
     return userData;
 });

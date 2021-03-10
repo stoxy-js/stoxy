@@ -12,6 +12,10 @@ Return a promise.
 | ---- | -------------------------------------------------------- |
 | key  | Key in string form. Used as the name of the state object |
 
+### Returns
+
+A void promise
+
 ### Usage
 
 ```js copy

@@ -10,6 +10,11 @@ Returns a promise, which when resolved contains the state object data.
 | ---- | -------------------------------------------------------- |
 | key  | Key in string form. Used as the name of the state object |
 
+
+### Returns
+
+A promise which resolves to the read result of the object: `{any}`
+
 ### Usage
 
 ```js copy

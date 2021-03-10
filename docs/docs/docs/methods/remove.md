@@ -11,6 +11,11 @@ Allows for removing one of multiple objects from the state object without having
 | key  | Key in string form. Used as the name of the state object |
 | predicate  | The Predicate by which the objects are removed |
 
+
+### Returns
+
+A promise which resolves to the write result of the object: `{key: string, value: any}`
+
 ### Usage
 
 ```js copy
