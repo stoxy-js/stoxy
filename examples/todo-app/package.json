@@ -21,7 +21,6 @@
     "@stoxy/form": "file:../../lib/form",
     "@stoxy/object": "file:../../lib/object",
     "@stoxy/repeat": "file:../../lib/repeat",
-    "@stoxy/stoxy": "^0.1.2",
     "@stoxy/string": "file:../../lib/string",
     "lit-element": "^2.0.1",
     "lit-html": "^1.0.0"

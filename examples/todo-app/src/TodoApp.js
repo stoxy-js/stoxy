@@ -3,7 +3,7 @@ import './TodoAdder';
 import './TodoEntry';
 import '@stoxy/repeat';
 import '@stoxy/string';
-import { clear, sub, write, persistKey, update } from '@stoxy/core';
+import { add, clear, sub, write, persistKey, update, read } from '@stoxy/core';
 
 export default class TodoApp extends LitElement {
     static get properties() {
@@ -25,6 +25,7 @@ export default class TodoApp extends LitElement {
             update('counter', counter => (counter += 1));
         }, 1000);
         sub('todos', this.todosChangeCallback.bind(this));
+
     }
 
     todosChangeCallback(e) {

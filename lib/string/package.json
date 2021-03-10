@@ -1,6 +1,6 @@
 {
   "name": "@stoxy/string",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Stoxy is a state management tool used for easy access to frequently used data without the hassle of template strings.",
   "main": "stoxy-string.js",
   "scripts": {},
@@ -11,6 +11,6 @@
   "author": "Matsuuu <huhta.matias@gmail.com> (https://matsu.fi/)",
   "license": "ISC",
   "dependencies": {
-    "@stoxy/core": "^0.2.1"
+    "@stoxy/core": "^0.2.2"
   }
 }
