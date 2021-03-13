@@ -9,6 +9,7 @@ as the state changes. No action needed from the developer side.
 ```js script
 import '@rocket/launch/inline-notification/inline-notification.js';
 ```
+
 <inline-notification type="tip" title="Reactivity">
 
 As with all of Stoxy elements, Stoxy String also updates it's contents automatically
@@ -21,6 +22,12 @@ as the state changes. No action needed from the developer side.
 | Name    | Attribute                                       |
 | ------- | ----------------------------------------------- |
 | default | Default value of the string, if no value is set |
+
+### Events
+
+| Name    | Attribute                                                                                                                |
+| ------- | ------------------------------------------------------------------------------------------------------------------------ |
+| updated | Triggers when the state object observed by the stoxy element is updated. Event detail contains data about the new state. |
 
 ### Usage
 

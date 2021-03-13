@@ -5,10 +5,10 @@ Stoxy Repeat is a web component used for iterating state content onto the web pa
 The repeat component is useful for situations where the state object is iterable
 and is desired to be displayed as e.g. a list
 
-
 ```js script
 import '@rocket/launch/inline-notification/inline-notification.js';
 ```
+
 <inline-notification type="tip" title="Reactivity">
 
 As with all of Stoxy elements, Stoxy Repeat also updates it's contents automatically
@@ -22,6 +22,12 @@ as the state changes. No action needed from the developer side.
 | ---- | -------------------------------------------------------- |
 | key  | Key in string form. Used as the name of the state object |
 | id   | Identifier for the accessed iterable object              |
+
+### Events
+
+| Name    | Attribute                                                                                                                |
+| ------- | ------------------------------------------------------------------------------------------------------------------------ |
+| updated | Triggers when the state object observed by the stoxy element is updated. Event detail contains data about the new state. |
 
 ### Usage
 

@@ -11,6 +11,7 @@ as the state changes. No action needed from the developer side.
 ```js script
 import '@rocket/launch/inline-notification/inline-notification.js';
 ```
+
 <inline-notification type="tip" title="Reactivity">
 
 As with all of Stoxy elements, Stoxy Object also updates it's contents automatically
@@ -25,21 +26,27 @@ as the state changes. No action needed from the developer side.
 | key    | Key in string form. Used as the name of the state object                                                            |
 | prefix | Prefix to access wanted state object properties. Makes it possible for Stoxy to recognize plain strings to replace. |
 
+### Events
+
+| Name    | Attribute                                                                                                                |
+| ------- | ------------------------------------------------------------------------------------------------------------------------ |
+| updated | Triggers when the state object observed by the stoxy element is updated. Event detail contains data about the new state. |
+
 ### Usage
 
 With a state object of
 
 ```js copy
-import "@stoxy/object";
+import '@stoxy/object';
 import { write } from 'stoxy';
 
 const userData = {
     name: 'Matsuuu',
     favoriteAnimal: 'Cats',
     country: {
-        countryName: "Finland",
-        countryCode: "FI"
-    }
+        countryName: 'Finland',
+        countryCode: 'FI',
+    },
 };
 
 write('user', userData);
