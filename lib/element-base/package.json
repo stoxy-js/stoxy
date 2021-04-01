@@ -1,8 +1,8 @@
 {
-  "name": "@stoxy/object",
+  "name": "@stoxy/element-base",
   "version": "0.3.0",
   "description": "Stoxy is a state management tool used for easy access to frequently used data without the hassle of template strings.",
-  "main": "stoxy-object.js",
+  "main": "stoxy-element.js",
   "scripts": {},
   "repository": {
     "type": "git",
@@ -10,8 +10,8 @@
   },
   "author": "Matsuuu <huhta.matias@gmail.com> (https://matsu.fi/)",
   "license": "ISC",
+  "types": "index.d.ts",
   "dependencies": {
-    "@stoxy/core": "^0.3.0",
-    "@stoxy/element-base": "^0.3.0"
+    "@stoxy/core": "^0.3.0"
   }
 }

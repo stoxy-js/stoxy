@@ -17,11 +17,7 @@
   "author": "todo-app",
   "license": "MIT",
   "dependencies": {
-    "@stoxy/core": "file:../../lib/core",
-    "@stoxy/form": "file:../../lib/form",
-    "@stoxy/object": "file:../../lib/object",
-    "@stoxy/repeat": "file:../../lib/repeat",
-    "@stoxy/string": "file:../../lib/string",
+    "@stoxy/stoxy": "^0.3.0",
     "lit-element": "^2.0.1",
     "lit-html": "^1.0.0"
   },
