@@ -193,5 +193,17 @@
       <changefreq>monthly</changefreq>
     </url>
   
+    <url>
+      <loc>https://stoxy.dev//docs/mixins/</loc>
+      <lastmod>2021-04-10T19:49:59.112Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//docs/mixins/element-mixin/</loc>
+      <lastmod>2021-04-10T19:50:51.555Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
 </urlset>
 

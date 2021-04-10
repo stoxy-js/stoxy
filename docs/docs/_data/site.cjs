@@ -7,12 +7,12 @@ module.exports = function () {
         socialLinks: [
             {
                 name: 'GitHub',
-                url: 'https://github.com/Matsuuu/stoxy',
+                url: 'https://github.com/stoxy-js/stoxy',
             },
         ],
-        gitSiteUrl: 'https://github.com/Matsuuu/stoxy',
+        gitSiteUrl: 'https://github.com/stoxy-js/stoxy',
         gitBranch: 'master',
-        helpUrl: 'https://github.com/Matsuuu/stoxy/issues',
+        helpUrl: 'https://github.com/stoxy-js/stoxy/issues',
         logoAlt: 'Rocket Logo',
         iconColorMaskIcon: '#232629',
         iconColorMsapplicationTileColor: '#1d3557',

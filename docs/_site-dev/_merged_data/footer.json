@@ -4,7 +4,7 @@
     "children": [
       {
         "text": "Help and Feedback",
-        "href": "https://github.com/Matsuuu/stoxy/issues"
+        "href": "https://github.com/stoxy-js/stoxy/issues"
       }
     ]
   },
@@ -13,7 +13,7 @@
     "children": [
       {
         "text": "GitHub",
-        "href": "https://github.com/Matsuuu/stoxy"
+        "href": "https://github.com/stoxy-js/stoxy"
       },
       {
         "text": "Twitter",
@@ -26,7 +26,7 @@
     "children": [
       {
         "text": "Contribute",
-        "href": "https://github.com/Matsuuu/stoxy/issues"
+        "href": "https://github.com/stoxy-js/stoxy/issues"
       }
     ]
   }

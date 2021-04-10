@@ -1,4 +1,4 @@
-let url = 'https://matsuuu.github.io/stoxy/';
+let url = 'https://stoxy.dev/';
 
 // handling netlify previews
 switch (process.env.CONTEXT) {
