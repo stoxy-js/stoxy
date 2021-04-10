@@ -205,5 +205,17 @@
       <changefreq>monthly</changefreq>
     </url>
   
+    <url>
+      <loc>https://stoxy.dev//guides/examples/html-element-mixin/</loc>
+      <lastmod>2021-04-10T20:23:33.510Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//guides/examples/lit-element-mixin/</loc>
+      <lastmod>2021-04-10T20:26:24.820Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
 </urlset>
 
