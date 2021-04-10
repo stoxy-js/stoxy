@@ -1,12 +1,12 @@
 {
   "name": "@stoxy/core",
   "version": "0.3.1",
-  "description": "Stoxy is a state management tool used for easy access to frequently used data without the hassle of template strings.",
+  "description": "The reactive state management system equipped with Web Components.",
   "main": "stoxy.js",
   "scripts": {},
   "repository": {
         "type": "git",
-        "url": "https://github.com/Matsuuu/stoxy"
+        "url": "https://github.com/stoxy-js/stoxy"
     },
   "author": "Matsuuu <huhta.matias@gmail.com> (https://matsu.fi/)",
   "license": "ISC",

@@ -1,7 +1,7 @@
 {
   "name": "@stoxy/repeat",
   "version": "0.3.0",
-  "description": "Stoxy is a state management tool used for easy access to frequently used data without the hassle of template strings.",
+  "description": "The reactive state management system equipped with Web Components.",
   "main": "stoxy-repeat.js",
   "scripts": {},
   "repository": {
