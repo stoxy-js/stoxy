@@ -144,6 +144,14 @@ npm install @stoxy/core @stoxy/string @stoxy/repeat @stoxy/form @stoxy/object
 
 ## Usage
 
+Stoxy can be used currently in 3 ways, which interoperate between each other:
+
+1. With just the @stoxy/core and the function below
+2. With Stoxy Elements
+3. With [Stoxy Element Mixin](https://github.com/stoxy-js/stoxy-element-mixin)
+
+You can freely mix and match these implementations too! 
+
 #### Write
 
 ```js
