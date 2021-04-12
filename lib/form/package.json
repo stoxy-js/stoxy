@@ -1,6 +1,6 @@
 {
   "name": "@stoxy/form",
-  "version": "0.3.0",
+  "version": "0.3.3",
   "description": "The reactive state management system equipped with Web Components.",
   "main": "stoxy-form.js",
   "scripts": {},
@@ -11,6 +11,6 @@
   "author": "Matsuuu <huhta.matias@gmail.com> (https://matsu.fi/)",
   "license": "ISC",
   "dependencies": {
-    "@stoxy/core": "^0.3.0"
+    "@stoxy/core": "^0.3.3"
   }
 }

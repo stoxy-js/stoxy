@@ -1,6 +1,6 @@
 {
   "name": "@stoxy/element-base",
-  "version": "0.3.0",
+  "version": "0.3.3",
   "description": "The reactive state management system equipped with Web Components.",
   "main": "stoxy-element.js",
   "scripts": {},
@@ -12,6 +12,6 @@
   "license": "ISC",
   "types": "index.d.ts",
   "dependencies": {
-    "@stoxy/core": "^0.3.0"
+    "@stoxy/core": "^0.3.3"
   }
 }

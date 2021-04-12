@@ -21,6 +21,8 @@ export default class TodoApp extends LitElement {
 
     firstUpdated() {
         write('counter', 0);
+        write('foo.bar', "bar");
+        write('foo.bin', "bin");
         setInterval(() => {
             update('counter', counter => (counter += 1));
         }, 1000);

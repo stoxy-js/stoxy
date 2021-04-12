@@ -17,7 +17,7 @@
   "author": "todo-app",
   "license": "MIT",
   "dependencies": {
-    "@stoxy/stoxy": "^0.3.0",
+    "@stoxy/stoxy": "^0.3.3",
     "lit-element": "^2.0.1",
     "lit-html": "^1.0.0"
   },
