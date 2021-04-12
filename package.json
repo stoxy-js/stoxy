@@ -6,7 +6,8 @@
   "scripts": {
     "start": "wds --node-resolve --watch --open",
     "example:todo": "cd examples/todo-app && npm start",
-    "example:userlist": "cd examples/user-list && npm start"
+    "example:userlist": "cd examples/user-list && npm start",
+    "example:race-conditioning": "cd examples/race-conditioning && npm start"
   },
   "author": "Matsuuu <huhta.matias@gmail.com> (https://matsu.fi/)",
   "license": "ISC",
