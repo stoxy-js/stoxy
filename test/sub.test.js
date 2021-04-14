@@ -40,3 +40,32 @@ it('Should react to sub events on subkeys', async () => {
 
     expect(foo).to.equal(1);
 })
+
+it('Should return subkey value on sub events on subkeys', async () => {
+    let foo = 0;
+    let counterVal = 0;
+    sub("stoxy-foo.bar.counter", (e) => {
+        foo += 1
+        counterVal = e.data;
+    });
+
+    write("stoxy-foo", {
+        foo: "ff",
+        bar: {
+            counter: 0
+        }
+    });
+    clear("stoxy-foo");
+    write("stoxy-foo",
+        {
+            foo: "ff",
+            bar: {
+                counter: 0
+            }
+        }
+    );
+    await update("stoxy-foo.bar.counter", c => c += 1);
+
+    expect(foo).to.equal(1);
+    expect(counterVal).to.equal(1);
+})
