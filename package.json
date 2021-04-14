@@ -1,10 +1,12 @@
 {
   "name": "@stoxy/stoxy",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "The reactive state management system equipped with Web Components.",
   "main": "index.js",
   "scripts": {
     "start": "wds --node-resolve --watch --open",
+    "test": "web-test-runner \"test/**/*.test.js\" --node-resolve",
+    "test-coverage": "web-test-runner \"test/**/*.test.js\" --node-resolve --coverage",
     "example:todo": "cd examples/todo-app && npm start",
     "example:userlist": "cd examples/user-list && npm start",
     "example:race-conditioning": "cd examples/race-conditioning && npm start"
@@ -12,8 +14,10 @@
   "author": "Matsuuu <huhta.matias@gmail.com> (https://matsu.fi/)",
   "license": "ISC",
   "devDependencies": {
+    "@esm-bundle/chai": "^4.3.4",
     "@simplr-wc/prettier-config": "^1.0.1",
-    "@web/dev-server": "0.0.15"
+    "@web/dev-server": "0.0.15",
+    "@web/test-runner": "^0.12.19"
   },
   "prettier": "@simplr-wc/prettier-config",
   "dependencies": {

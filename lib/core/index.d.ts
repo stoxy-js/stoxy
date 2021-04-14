@@ -32,7 +32,7 @@ export function write(key: string, value: any): Promise<WriteResult>;
  * @param {string} key  Key of state object
  * @returns {Promise<void>}
  */
-export function clear(key: string): Promise<void>;
+export function clear(key?: string): Promise<void>;
 
 /**
  * Subscribe to updates in state of wanted object.
