@@ -62,45 +62,35 @@ console.log("after: ", res.bin.boo);
 });
 */
 
-/*
-* REMOVE
-const objectValue = {
-foo: "bar",
-bin: {
-    boo: [
-        "Foo",
-        "Bar",
-        "Baz"
-    ]
-}
-};
+const objectValue = [
+    { name: "Foo" },
+    { name: "Bar" },
+    { name: "Baz" }
+];
 write("objectValue", objectValue);
 
 read("objectValue").then(async res => {
 
-console.log("Before: ", res.bin.boo);
-await remove("objectValue.bin.boo", item => item === "Bar")
-console.log("after: ", res.bin.boo);
-console.log("State: ", window._STOXY_STATE_CACHE.objectValue.bin.boo);
+    console.log("Before: ", res);
+    await remove("objectValue", item => item.name === "Bar")
+    console.log("after: ", res);
+    console.log("State: ", window._STOXY_STATE_CACHE.objectValue);
+});
+
+
+/*
+const arrayValue = [
+    "Foo",
+    "Bar",
+    "Baz"
+]
+write("arrayValue", arrayValue);
+
+read("arrayValue").then(async res => {
+
+    console.log("Before: ", res);
+    await add("arrayValue", "ZULU")
+    console.log("after: ", res);
+    console.log("State: ", window._STOXY_STATE_CACHE.arrayValue);
 });
 */
-
-const objectValue = {
-    foo: "bar",
-    bin: {
-        boo: [
-            "Foo",
-            "Bar",
-            "Baz"
-        ]
-    }
-};
-write("objectValue", objectValue);
-
-read("objectValue").then(async res => {
-
-    console.log("Before: ", res.bin.boo);
-    await add("objectValue.bin.boo", "ZULU")
-    console.log("after: ", res.bin.boo);
-    console.log("State: ", window._STOXY_STATE_CACHE.objectValue.bin.boo);
-});
