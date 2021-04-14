@@ -1,13 +1,13 @@
 {
   "name": "@stoxy/core",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "description": "The reactive state management system equipped with Web Components.",
   "main": "stoxy.js",
   "scripts": {},
   "repository": {
-        "type": "git",
-        "url": "https://github.com/stoxy-js/stoxy"
-    },
+    "type": "git",
+    "url": "https://github.com/stoxy-js/stoxy"
+  },
   "author": "Matsuuu <huhta.matias@gmail.com> (https://matsu.fi/)",
   "license": "ISC",
   "types": "index.d.ts"
