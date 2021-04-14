@@ -116,8 +116,7 @@ it("Should write and not reference anything on complex objects", async () => {
 });
 
 it("Can write to subkeys", async () => {
-    write("stoxy-state", {
-    })
+    write("stoxy-state", {})
 
     write("stoxy-state.foo.bar.bin.baz", "xxx");
     const res = await read("stoxy-state.foo.bar.bin.baz");

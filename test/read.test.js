@@ -1,5 +1,5 @@
 import { expect } from '@esm-bundle/chai';
-import { write, read } from '../lib/core';
+import { write, read, persistKey } from '../lib/core';
 
 it('String read should work', async () => {
     const string = 'Stoxy';
@@ -48,3 +48,26 @@ it('Array read should work', async () => {
 });
 
 
+it('Can read persisted state values', async () => {
+    persistKey("stoxy-state");
+    write("stoxy-state", {
+        foo: "bar",
+        bin: {
+            baz: "foo"
+        }
+    });
+
+    const foo = await read("stoxy-state.foo");
+    const baz = await read("stoxy-state.bin.baz");
+
+    expect(foo).to.equal("bar");
+    expect(baz).to.equal("foo");
+});
+
+it("Can fetch undefined", async () => {
+    const foo = await read("foo");
+    const foobar = await read("foo.bar");
+
+    expect(foo).to.equal(undefined);
+    expect(foobar).to.equal(undefined);
+});
