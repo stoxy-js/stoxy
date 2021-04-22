@@ -229,5 +229,11 @@
       <changefreq>monthly</changefreq>
     </url>
   
+    <url>
+      <loc>https://stoxy.dev//guides/examples/hooks/</loc>
+      <lastmod>2021-04-22T17:03:49.943Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
 </urlset>
 

@@ -11,11 +11,11 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Recipes: Subscribing to updates: Stoxy</title>
-<meta property="og:title" content="Recipes: Subscribing to updates: Stoxy">
+<title>Examples: Hooks: Stoxy</title>
+<meta property="og:title" content="Examples: Hooks: Stoxy">
 
 <meta name="generator" content="rocket 0.1">
-<link rel="canonical" href="https://stoxy.dev/guides/recipes/subscribing-to-updates/">
+<link rel="canonical" href="https://stoxy.dev/guides/examples/hooks/">
 
 
 
@@ -35,8 +35,8 @@
     <meta property="og:site_name" content="Stoxy">
 <meta property="og:type" content="website">
 
-<meta property="og:image" content="https://stoxy.dev/1cbaf32c.png">
-<meta property="og:url" content="https://stoxy.dev/guides/recipes/subscribing-to-updates/">
+<meta property="og:image" content="https://stoxy.dev/040559f3.png">
+<meta property="og:url" content="https://stoxy.dev/guides/examples/hooks/">
 
 <meta name="twitter:card" content="summary_large_image">
 
@@ -51,11 +51,11 @@
 
   
 
-<link rel="preload" href="../../../a6d6f7c135.js" as="script" crossorigin="anonymous">
+<link rel="preload" href="../../../a6d6f7c121.js" as="script" crossorigin="anonymous">
 <link rel="preload" href="../../../ca2b0b57.js" as="script" crossorigin="anonymous">
 <link rel="preload" href="../../../8e4cba22.js" as="script" crossorigin="anonymous">
 <link rel="preload" href="../../../1ae651f9.js" as="script" crossorigin="anonymous">
-<link rel="preload" href="../../../50d2370335.js" as="script" crossorigin="anonymous">
+<link rel="preload" href="../../../50d2370321.js" as="script" crossorigin="anonymous">
 <link rel="preload" href="../../../87893830.js" as="script" crossorigin="anonymous">
 </head>
 
@@ -144,7 +144,7 @@
 
     
       <rocket-navigation>
-  <ul><li class="menu-item">
+  <ul><li class="menu-item active">
 <a href="/guides/examples/">Examples</a>
 <ul><li class="menu-item">
 <a href="/guides/examples/counter/">Counter</a>
@@ -166,8 +166,9 @@
 <a href="/guides/examples/user-list/">User Listing</a>
 
 </li>
-<li class="menu-item">
+<li class="menu-item current">
 <a href="/guides/examples/hooks/">Hooks</a>
+
 
 </li></ul>
 </li>
@@ -182,7 +183,7 @@
 
 </li></ul>
 </li>
-<li class="menu-item active">
+<li class="menu-item">
 <a href="/guides/recipes/">Recipes</a>
 <ul><li class="menu-item">
 <a href="/guides/recipes/persisting-data/">Persisting data</a>
@@ -196,9 +197,8 @@
 <a href="/guides/recipes/removing-data/">Removing data</a>
 
 </li>
-<li class="menu-item current">
+<li class="menu-item">
 <a href="/guides/recipes/subscribing-to-updates/">Subscribing to updates</a>
-
 
 </li>
 <li class="menu-item">
@@ -228,35 +228,15 @@
       
         <main class="markdown-body">
   
-    <h1 id="recipes-subscribing-to-updates"><a class="anchor" href="#recipes-subscribing-to-updates"><svg class="octicon octicon-link" viewBox="0 0 16 16" aria-hidden="true" width="16" height="16"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Recipes: Subscribing to updates</h1>
-<p>Subscribing to a key allows the developer to handle state updates programmatically in any way desired.</p>
-<pre class="language-js"><code class="language-js"><span class="token keyword module">import</span> <span class="token punctuation">{</span> sub <span class="token punctuation">}</span> <span class="token keyword module">from</span> <span class="token string">'@stoxy/core'</span><span class="token punctuation">;</span>
-
-<span class="token function">sub</span><span class="token punctuation">(</span><span class="token string">"shoppingcart"</span><span class="token punctuation">,</span> updateItemCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">function</span> <span class="token function">updateItemCount</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">write</span><span class="token punctuation">(</span><span class="token string">"itemcount"</span><span class="token punctuation">,</span> e<span class="token punctuation">.</span><span class="token property-access">data</span><span class="token punctuation">.</span><span class="token property-access">length</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<h3 id="unsubscribing"><a class="anchor" href="#unsubscribing"><svg class="octicon octicon-link" viewBox="0 0 16 16" aria-hidden="true" width="16" height="16"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Unsubscribing</h3>
-<p>As Stoxy utilizes event listeners in it's subscribing, it's good manner to clean up
-after the subscription is no more needed.</p>
-<p>The sub function returns a callable function which when called, removes the set event listeners.</p>
-<pre class="language-js"><code class="language-js"><span class="token keyword module">import</span> <span class="token punctuation">{</span> sub <span class="token punctuation">}</span> <span class="token keyword module">from</span> <span class="token string">'@stoxy/core'</span><span class="token punctuation">;</span>
-
-<span class="token keyword">const</span> unsub <span class="token operator">=</span> <span class="token function">sub</span><span class="token punctuation">(</span><span class="token string">"onlyone"</span><span class="token punctuation">,</span> updateOnlyOnce<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">function</span> <span class="token function">updateOnlyOnce</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// Do something</span>
-    <span class="token function">unsub</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
+    <h1 id="examples-hooks"><a class="anchor" href="#examples-hooks"><svg class="octicon octicon-link" viewBox="0 0 16 16" aria-hidden="true" width="16" height="16"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Examples: Hooks</h1>
+<p>Below is a small example of how to utilize the Hooks in a Preact application</p>
+<iframe src="https://codesandbox.io/embed/clever-visvesvaraya-nb4le?fontsize=14&amp;hidenavigation=1&amp;theme=dark" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" title="clever-visvesvaraya-nb4le" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
 
   
     <div class="content-footer">
   <p>
     Caught a mistake or want to contribute to the documentation?
-    <a href="https://github.com/stoxy-js/stoxy/edit/master/docs/./docs/guides/recipes/subscribing-to-updates.md">Edit this page on GitHub!</a>
+    <a href="https://github.com/stoxy-js/stoxy/edit/master/docs/./docs/guides/examples/hooks.md">Edit this page on GitHub!</a>
   </p>
 </div>
 
@@ -382,7 +362,7 @@ serviceWorkerUpdate();
       });
     }
   </script>
-<script type="module" src="../../../a6d6f7c135.js"></script>
-<script type="module" src="../../../50d2370335.js"></script>
+<script type="module" src="../../../a6d6f7c121.js"></script>
+<script type="module" src="../../../50d2370321.js"></script>
 
 </body></html>
