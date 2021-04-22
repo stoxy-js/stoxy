@@ -93,8 +93,10 @@ export function Clicker() {
     }
 
     return (
-        <p>Pushed {counterState} times</p>
-        <button onClick={inc} type="button">Click</button>
+        <div>
+            <p>Pushed {counterState} times</p>
+            <button onClick={inc} type="button">Click</button>
+        </div>
     );
 }
 ```
