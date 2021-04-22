@@ -41,9 +41,9 @@ export function clear(key?: string): Promise<void>;
  *
  * @param {string} key  Key of state object
  * @param {Function} callback  Callback Function to call when state of given key is updated
- * @returns {void}
+ * @returns {Function} Callable function to remove event listeners
  */
-export function sub(key: string, callback: Function): void;
+export function sub(key: string, callback: Function): Function;
 
 /**
  * Add an element to the state object array by key.
