@@ -3,7 +3,7 @@ module.exports = function () {
         dir: 'ltr',
         lang: 'en',
         name: 'Stoxy',
-        description: 'The reactive state management system equipped with Web Components',
+        description: 'The reactive state management system for all modern Web Technologies',
         socialLinks: [
             {
                 name: 'GitHub',
