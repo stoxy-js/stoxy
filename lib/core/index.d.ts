@@ -41,9 +41,9 @@ export function clear(key?: string): Promise<void>;
  *
  * @param {string} key  Key of state object
  * @param {Function} callback  Callback Function to call when state of given key is updated
- * @returns {void}
+ * @returns {Function} Callable function to remove event listeners
  */
-export function sub(key: string, callback: Function): void;
+export function sub(key: string, callback: Function): Function;
 
 /**
  * Add an element to the state object array by key.
@@ -85,3 +85,14 @@ export function persistKey(...keyOrKeys: string[]): void;
  * @returns {Promise<WriteResult>}
  */
 export function update(key: string, delegate: Function): Promise<WriteResult>;
+
+/**
+ * Find object(s) from a state object using a predicate.
+ *
+ * Allows the developer to find items with a given predicate from a collection of items
+ *
+ * @param {string} key  Key of state object
+ * @param {Function} predicate  Predicate function by which the objects are filtered
+ * @returns {Promise<Array<any>>}
+ */
+export function where(key: string, predicate: Function): Promise<Array<any>>;

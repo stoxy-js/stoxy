@@ -1,7 +1,7 @@
 {
   "name": "@stoxy/object",
   "version": "0.4.0",
-  "description": "The reactive state management system equipped with Web Components.",
+  "description": "The reactive state management system for all modern Web Technologies",
   "main": "stoxy-object.js",
   "scripts": {},
   "repository": {

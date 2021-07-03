@@ -14,7 +14,8 @@ Allows you to programmatically react to state changes in wanted state objects
 
 ### Returns
 
-void
+Unsub function. The sub method adds event listeners to the DOM, so they need to be cleaned up to avoid 
+memory leaks. Calling the returned unsub function will remove the listeners.
 
 ### Usage
 
@@ -34,6 +35,21 @@ sub('shoppingcart', updateItemCount);
 function updateItemCount(e) {
     write('itemcount', e.data.length);
 }
+```
+
+---
+
+```js copy
+import { sub } from '@stoxy/core';
+
+const unsubber = sub('shoppingcart', updateItemCount);
+
+function updateItemCount(e) {
+    write('itemcount', e.data.length);
+}
+
+// Unsubscribe from events
+unsubber();
 ```
 
 ### Callback payload

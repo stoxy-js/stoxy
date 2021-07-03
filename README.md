@@ -6,7 +6,7 @@
 
 # 🗂️ Stoxy
 
-Stoxy is a state management API equipped with Web Components.
+Stoxy is a state management API for all modern Web Technologies.
 
 Stoxy allows you to easily handle, persist and update data in your DOM without the weight of a framework.
 
@@ -93,6 +93,78 @@ With Stoxy, the same markdown could be created without being in the same context
 ```
 
 ⚠️ **Dynamic content inside Stoxy Elements updates when the data does. Update once, DOM updates everywhere.**
+
+
+Stoxy also supports different libraries:
+
+**LitElement / Class based Components**
+
+```javascript
+
+class MyComponent extends StoxyElement(LitElement) {
+  static stoxyProperties = {
+    key: "example-data",
+    state: {
+      username: "World",
+      clicks: 0,
+      description: "This is a example of Stoxy Element Mixin",
+    },
+    init: true,
+  };
+
+  static get properties() {
+    return {
+      username: { type: String },
+      clicks: { type: Number },
+      description: { type: String },
+    };
+  }
+
+  constructor() {
+    super();
+
+    this.username = "";
+    this.clicks = 0;
+    this.description = "";
+  }
+
+  render() {
+    return html`
+      <h2>Hello, ${this.username}!</h2>
+      <p>You have clicked the clicker ${this.clicks} times</p>
+      <p>${this.description}</p>
+    `;
+  }
+}
+```
+
+
+**React/Preact with Hooks**
+
+```javascript
+import { useStoxy } from "@stoxy/hooks";
+import React from "react";
+
+export function Clicker() {
+    // You can rename the variables returned by useStoxy while destructuring
+    const { state: counterState, update: updateConter } = useStoxy(React, {
+        key: "demo.counter",
+        state: 0
+    });
+
+    function inc() {
+        // No need to add the key name here
+        updateCounter(c => c += 1);
+    }
+
+    return (
+        <div>
+            <p>Pushed {counterState} times</p>
+            <button onClick={inc} type="button">Click</button>
+        </div>
+    );
+}
+```
 
 
 ### Persistence
