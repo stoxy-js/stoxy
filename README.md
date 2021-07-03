@@ -14,6 +14,12 @@ Stoxy allows you to easily handle, persist and update data in your DOM without t
 
 Official docs can be found [here](https://stoxy.dev)
 
+## Additional tooling
+
+- [Stoxy Hooks for (P)React](https://github.com/stoxy-js/hooks)
+- [Stoxy Element Mixin for Web Components](https://github.com/stoxy-js/stoxy-element-mixin)
+
+
 ## ❓ How
 
 Stoxy utilizes the browser's tooling with respect to your computer's memory.
