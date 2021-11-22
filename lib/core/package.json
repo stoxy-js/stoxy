@@ -1,6 +1,6 @@
 {
   "name": "@stoxy/core",
-  "version": "0.4.9",
+  "version": "0.4.10",
   "description": "The reactive state management system equipped with Web Components.",
   "main": "stoxy.js",
   "scripts": {},
