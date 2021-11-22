@@ -1,7 +1,7 @@
 ---
 title: Stoxy
 layout: layout-home
-slogan: The reactive state management system equipped with Web Components
+slogan: The reactive state management system for all modern Web Technologies
 callToActionItems:
   - text: Follow Guides
     href: /guides/
