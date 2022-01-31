@@ -17,6 +17,33 @@ it('Number read should work', async () => {
     expect(res).to.equal(number);
 });
 
+it("Should not break under a large event batch", async () => {
+    for (let i = 0; i < 50; i++) {
+        write("foo-" + i, { id: i });
+    }
+
+    for (let i = 0; i < 50; i++) {
+        const res = await read("foo-" + i);
+        expect(res.id).to.equal(i);
+    }
+});
+
+it("Should get the latest object even with multiple writes", async () => {
+    write("stoxy-state", { id: 1 });
+    write("stoxy-state", { id: 1, name: "foo" });
+    write("stoxy-state", { id: 1, name: "foo", age: 55 });
+    write("stoxy-state", { id: 1, name: "foo", age: 55 });
+    write("stoxy-state", { id: 1, name: "foo", age: 55, bar: { biz: "Ben" } });
+
+    const res = await read("stoxy-state");
+    const biz = await read("stoxy-state.bar.biz");
+    expect(res.id).to.equal(1);
+    expect(res.name).to.equal("foo");
+    expect(res.age).to.equal(55);
+    expect(res.bar.biz).to.equal("Ben");
+    expect(biz).to.equal("Ben");
+});
+
 it('Object read should work', async () => {
     const obj = {
         foo: 'bar',
