@@ -3,6 +3,14 @@ export interface WriteResult {
     value: any;
 }
 
+export type SubscribeActionType = "Delete" | "Update";
+
+export interface SubscribeCallback {
+    key: string;
+    action: SubscribeActionType;
+    data?: any;
+}
+
 /**
  * Get the state object data from Stoxy.
  * Returns a promise, which when resolved contains the state object data
@@ -43,7 +51,7 @@ export function clear(key?: string): Promise<void>;
  * @param {Function} callback  Callback Function to call when state of given key is updated
  * @returns {Function} Callable function to remove event listeners
  */
-export function sub(key: string, callback: Function): Function;
+export function sub(key: string, callback: (callback: SubscribeCallback) => void): Function;
 
 /**
  * Add an element to the state object array by key.
