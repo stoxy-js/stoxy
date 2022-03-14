@@ -51,7 +51,7 @@ const config = {
 
 config.presets = [rocketLaunch(), rocketBlog(), rocketSearch()];
 config.absoluteBaseUrl = "https://stoxy-js.github.io/stoxy/";
-config.pathPrefix = "/stoxy/";
-config.urlPath = "/stoxy/";
+//config.pathPrefix = "/stoxy/";
+//config.urlPath = "/stoxy/";
 
 export default config;
