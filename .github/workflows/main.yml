@@ -1,5 +1,4 @@
 name: Deploy Docs
-on: []
 jobs:
   deploy:
     concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
