@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+    <url>
+      <loc>https://stoxy.dev//404.html</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//docs/components/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//docs/components/stoxy-form/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//docs/components/stoxy-object/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//docs/components/stoxy-repeat/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//docs/components/stoxy-string/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//docs/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//docs/methods/add/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//docs/methods/clear/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//docs/methods/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//docs/methods/persist-key/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//docs/methods/read/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//docs/methods/remove/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//docs/methods/sub/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//docs/methods/update/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//docs/methods/write/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//docs/mixins/element-mixin/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//docs/mixins/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//guides/examples/counter/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//guides/examples/html-element-mixin/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//guides/examples/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//guides/examples/lit-element-mixin/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//guides/examples/todo/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//guides/examples/user-list/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//guides/getting-started/core-functionality/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//guides/getting-started/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//guides/getting-started/installation/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//guides/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//guides/recipes/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//guides/recipes/persisting-data/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//guides/recipes/reading-data/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//guides/recipes/removing-data/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//guides/recipes/subscribing-to-updates/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//guides/recipes/updating-data/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//guides/recipes/writing-data/</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//</loc>
+      <lastmod>2021-04-22T00:27:02.060Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//docs/hooks/</loc>
+      <lastmod>2021-04-22T16:58:59.956Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//docs/hooks/using-stoxy-with-hooks/</loc>
+      <lastmod>2021-04-22T16:58:59.956Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//guides/examples/hooks/</loc>
+      <lastmod>2021-04-22T17:03:49.943Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+    <url>
+      <loc>https://stoxy.dev//docs/methods/where/</loc>
+      <lastmod>2021-04-22T17:19:00.212Z</lastmod>
+      <changefreq>monthly</changefreq>
+    </url>
+  
+</urlset>
+
