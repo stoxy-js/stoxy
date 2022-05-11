@@ -11,14 +11,17 @@ export interface SubscribeCallback {
     data?: any;
 }
 
+export type StoxySubscribeCallback = SubscribeCallback;
+export type StoxyWriteResult = WriteResult;
+
 /**
  * Get the state object data from Stoxy.
  * Returns a promise, which when resolved contains the state object data
  *
  * @param {string} key  Key of state object
- * @returns {Promise<any>}
+ * @returns {Promise<T>}
  */
-export function read(key: string): Promise<any>;
+export function read<T>(key: string): Promise<T>;
 
 /**
  * Write the state object by key
